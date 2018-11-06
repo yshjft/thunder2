@@ -3,7 +3,7 @@
  import android.os.Bundle;
  import android.support.v7.app.AppCompatActivity;
 
- public class 대회정보 extends AppCompatActivity {
+ public class contest_inform extends AppCompatActivity {
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {

@@ -11,15 +11,18 @@ import android.view.View;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
+
+
      public void onButton_contest(View v){
-         Intent intent=new Intent(getApplicationContext(), 대회정보.class);
+         Intent intent=new Intent(getApplicationContext(), contest_inform.class);
          startActivity(intent);
      }
 
      public void onButton_setting(View v){
-         Intent intent=new Intent(getApplicationContext(), 설정.class);
+         Intent intent=new Intent(getApplicationContext(), setting.class);
          startActivity(intent);
      }
 

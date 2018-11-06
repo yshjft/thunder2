@@ -3,7 +3,7 @@
  import android.os.Bundle;
  import android.support.v7.app.AppCompatActivity;
 
- public class 설정_로그인 extends AppCompatActivity {
+ public class setting_login extends AppCompatActivity {
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {

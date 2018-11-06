@@ -17,8 +17,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".대회정보"></activity>
-        <activity android:name=".설정"></activity>
+        <activity android:name=".contest_inform"></activity>
+        <activity android:name=".setting"></activity>
+        <activity android:name=".setting_alarm"></activity>
+        <activity android:name=".setting_login"></activity>
+        <activity android:name=".setting_market"></activity>
+        <activity android:name=".setting_new"></activity>
+
 
     </application>
 

@@ -3,12 +3,12 @@
  import android.os.Bundle;
  import android.support.v7.app.AppCompatActivity;
 
- public class 설정_알람설정 extends AppCompatActivity {
+ public class setting_market extends AppCompatActivity {
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
-         setContentView(R.layout.activity_setting_alarm);
+         setContentView(R.layout.activity_setting_market);
      }
 
 

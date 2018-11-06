@@ -5,7 +5,7 @@
  import android.content.Intent;
  import android.view.View;
 
- public class 설정 extends AppCompatActivity {
+ public class setting extends AppCompatActivity {
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -14,16 +14,21 @@
      }
 
      public void onButton_setting_alarm(View v) {
-         Intent intent = new Intent(getApplicationContext(), 설정_알람설정.class);
+         Intent intent = new Intent(getApplicationContext(), setting_alarm.class);
          startActivity(intent);
      }
 
      public void onButton_setting_login(View v) {
-         Intent intent = new Intent(getApplicationContext(), 설정_로그인.class);
+         Intent intent = new Intent(getApplicationContext(), setting_login.class);
          startActivity(intent);
      }
      public void onButton_setting_market(View v) {
-         Intent intent = new Intent(getApplicationContext(), 설정_업주관리.class);
+         Intent intent = new Intent(getApplicationContext(), setting_market.class);
+         startActivity(intent);
+     }
+
+     public void onButton_setting_new(View v) {
+         Intent intent = new Intent(getApplicationContext(), setting_new.class);
          startActivity(intent);
      }
 
