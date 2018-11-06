@@ -3,12 +3,12 @@
  import android.os.Bundle;
  import android.support.v7.app.AppCompatActivity;
 
- public class 대회정보 extends AppCompatActivity {
+ public class 설정_알람설정 extends AppCompatActivity {
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
-         setContentView(R.layout.activity_contestinformation);
+         setContentView(R.layout.activity_setting_alarm);
      }
 
 

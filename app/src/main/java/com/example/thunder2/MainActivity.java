@@ -13,12 +13,12 @@ import android.view.View;
         setContentView(R.layout.activity_main);
     }
 
-     public void onButton3Clicked(View v){
+     public void onButton_contest(View v){
          Intent intent=new Intent(getApplicationContext(), 대회정보.class);
          startActivity(intent);
      }
 
-     public void onButton4Clicked(View v){
+     public void onButton_setting(View v){
          Intent intent=new Intent(getApplicationContext(), 설정.class);
          startActivity(intent);
      }
