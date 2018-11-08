@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "716064210986",
+    "firebase_url": "https://teampro-2efed.firebaseio.com",
+    "project_id": "teampro-2efed",
+    "storage_bucket": "teampro-2efed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716064210986:android:1ec54d52c0ee9018",
+        "android_client_info": {
+          "package_name": "com.example.thunder2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716064210986-k7ssmsej0hregadganj9af41aqda1tbp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL0n7ed4Isq9pdNGkJun0NysLf2bsRl5o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
