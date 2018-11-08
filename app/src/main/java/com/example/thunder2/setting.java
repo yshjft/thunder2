@@ -27,9 +27,6 @@
          startActivity(intent);
      }
 
-     public void onButton_setting_new(View v) {
-         Intent intent = new Intent(getApplicationContext(), setting_new.class);
-         startActivity(intent);
-     }
+
 
  }

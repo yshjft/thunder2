@@ -22,7 +22,7 @@
         <activity android:name=".setting_alarm"></activity>
         <activity android:name=".setting_login"></activity>
         <activity android:name=".setting_market"></activity>
-        <activity android:name=".setting_new"></activity>
+        <activity android:name=".setting_register"></activity>
 
 
     </application>
