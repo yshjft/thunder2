@@ -26,5 +26,10 @@ import android.view.View;
          startActivity(intent);
      }
 
+     public void onButton_pclist(View v){
+        Intent intent= new Intent(getApplicationContext(),pcList.class);
+        startActivity(intent);
+     }
+
 
 }
