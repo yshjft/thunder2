@@ -31,7 +31,7 @@ import android.widget.TextView;
 
 
      public void onButton_contest(View v){
-         Intent intent=new Intent(getApplicationContext(), contest_inform.class);
+         Intent intent=new Intent(getApplicationContext(), list_contest.class);
          startActivity(intent);
      }
 
@@ -41,7 +41,7 @@ import android.widget.TextView;
      }
 
      public void onButton_pclist(View v){
-        Intent intent= new Intent(getApplicationContext(),pcList.class);
+        Intent intent= new Intent(getApplicationContext(),list_PC.class);
         startActivity(intent);
      }
 

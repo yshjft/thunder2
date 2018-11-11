@@ -9,11 +9,11 @@
 
  import java.util.ArrayList;
 
- public class pcList extends AppCompatActivity {
+ public class list_PC extends AppCompatActivity {
 
      RecyclerView rcv;
-     RcvAdapter rcvAdapter;
-     ArrayList<DataForm> list= new ArrayList<>();
+     RcvAdapter_forPC rcvAdapter;
+     ArrayList<DataForm_forPC> list= new ArrayList<>();
 
 
      @Override
@@ -26,33 +26,33 @@
          rcv=(RecyclerView)findViewById(R.id.main_rcv);
          rcv.setLayoutManager(new LinearLayoutManager(this));
 
-         rcvAdapter=new RcvAdapter(this, list);
+         rcvAdapter=new RcvAdapter_forPC(this, list);
          rcv.setAdapter(rcvAdapter);
      }
 
      private void init(){
-         DataForm a=new DataForm("넥스트");
+         DataForm_forPC a=new DataForm_forPC("넥스트");
          list.add(a);
 
-         a=new DataForm("고릴라");
+         a=new DataForm_forPC("고릴라");
          list.add(a);
 
-         a=new DataForm("조이칸");
+         a=new DataForm_forPC("조이칸");
          list.add(a);
 
-         a=new DataForm("큐브");
+         a=new DataForm_forPC("큐브");
          list.add(a);
 
-         a=new DataForm("해라");
+         a=new DataForm_forPC("해라");
          list.add(a);
 
-         a=new DataForm("인디고");
+         a=new DataForm_forPC("인디고");
          list.add(a);
 
-         a=new DataForm("스타덤");
+         a=new DataForm_forPC("스타덤");
          list.add(a);
 
-         a=new DataForm("다락");
+         a=new DataForm_forPC("다락");
          list.add(a);
 
 

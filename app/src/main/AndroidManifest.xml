@@ -21,14 +21,17 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
 
-        <activity android:name=".contest_inform"></activity>
+        <activity android:name=".aboutContest"></activity>
+        <activity android:name=".aboutPC"></activity>
         <activity android:name=".setting"></activity>
         <activity android:name=".setting_alarm"></activity>
         <activity android:name=".setting_login"></activity>
         <activity android:name=".setting_market"></activity>
         <activity android:name=".setting_register"></activity>
-        <activity android:name=".pcList"></activity>
-
+        <activity android:name=".setting_market_manage"></activity>
+        <activity android:name=".setting_market_contestNotice"></activity>
+        <activity android:name=".list_PC"></activity>
+        <activity android:name=".list_contest"></activity>
 
 
 

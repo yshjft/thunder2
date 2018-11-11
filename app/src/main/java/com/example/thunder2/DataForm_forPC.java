@@ -1,9 +1,9 @@
 package com.example.thunder2;
 
-public class DataForm {
+public class DataForm_forPC {
     private String name;
 
-    public DataForm(String name){
+    public DataForm_forPC(String name){
         this.name=name;
     }
 
