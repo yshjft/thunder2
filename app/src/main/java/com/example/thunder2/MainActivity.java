@@ -1,5 +1,6 @@
  package com.example.thunder2;
 
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,11 @@ import android.widget.TextView;
      public void onButton_pclist(View v){
         Intent intent= new Intent(getApplicationContext(),list_PC.class);
         startActivity(intent);
+     }
+
+     public void onButton_map(View v){
+         Intent intent= new Intent(getApplicationContext(),maps.class);
+         startActivity(intent);
      }
 
 
