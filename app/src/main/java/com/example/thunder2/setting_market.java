@@ -19,7 +19,7 @@
      }
 
      public void onButton_notice_contest(View v){
-         Intent intent= new Intent(getApplication(), setting_market_contestNotice.class);
+         Intent intent= new Intent(getApplication(), setting_market_contestManage.class);
          startActivity(intent);
      }
 

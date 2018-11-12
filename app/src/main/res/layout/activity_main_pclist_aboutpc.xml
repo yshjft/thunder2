@@ -24,13 +24,13 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="150dp"
             android:text="PC방 공지사항 : " />
 
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             android:text="특정 게임 전용 좌석 : " />
 
         <TextView
@@ -40,8 +40,8 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text=" 사용하지 않는 자리 : "/>
+            android:layout_height="150dp"
+            android:text="사용하지 않는 자리 : "/>
 
         <TextView
             android:layout_width="match_parent"
@@ -52,15 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="PC방 상세 주소: "/>
-
-
-
-
-
-
-
-
-
     </LinearLayout>
 
 </ScrollView>
