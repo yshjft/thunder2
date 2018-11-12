@@ -10,7 +10,7 @@
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
-         setContentView(R.layout.activity_setting_login);
+         setContentView(R.layout.activity_main_setting_login);
      }
 
      public void onButton_setting_register(View v) {

@@ -18,7 +18,7 @@ public class setting_market_contestManage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting_market_contestmanage);
+        setContentView(R.layout.activity_main_setting_market_contestmanage);
 
         init();
 

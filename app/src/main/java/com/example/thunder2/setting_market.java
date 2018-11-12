@@ -10,7 +10,7 @@
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
-         setContentView(R.layout.activity_setting_market);
+         setContentView(R.layout.activity_main_setting_market);
      }
 
      public void onButton_market_manage(View v){
