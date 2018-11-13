@@ -43,7 +43,8 @@
                 android:layout_width="384dp"
                 android:layout_height="40dp"
                 android:text="사진 선택"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:onClick="onButton_pc1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -68,7 +69,8 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:text="사진 선택"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:onClick="onButton_pc2"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,7 +94,8 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:text="사진 선택"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:onClick="onButton_pc3"/>
         </LinearLayout>
 
         <EditText
