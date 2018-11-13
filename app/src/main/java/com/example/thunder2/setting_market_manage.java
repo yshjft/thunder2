@@ -48,9 +48,7 @@ public class setting_market_manage extends AppCompatActivity {
             if (requestCode == PICK_IMAGE_REQUEST1 && resultCode == RESULT_OK && null != data) {
                 Uri uri = data.getData();
 
-                System.out.println("??????????????????/");
-                System.out.println(uri);
-                System.out.println("??????????????????/");
+
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                 int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
@@ -62,9 +60,7 @@ public class setting_market_manage extends AppCompatActivity {
             }else if(requestCode == PICK_IMAGE_REQUEST2 && resultCode == RESULT_OK && null != data) {
                 Uri uri = data.getData();
 
-                System.out.println("??????????????????/");
-                System.out.println(uri);
-                System.out.println("??????????????????/");
+
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                 int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
@@ -76,9 +72,7 @@ public class setting_market_manage extends AppCompatActivity {
             }else if(requestCode == PICK_IMAGE_REQUEST3 && resultCode == RESULT_OK && null != data) {
                 Uri uri = data.getData();
 
-                System.out.println("??????????????????/");
-                System.out.println(uri);
-                System.out.println("??????????????????/");
+               
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                 int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
