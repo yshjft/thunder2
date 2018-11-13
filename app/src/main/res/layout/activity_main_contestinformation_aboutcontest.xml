@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/contest_image"
             android:layout_width="match_parent"
             android:layout_height="248dp"
             android:src="@drawable/pccontest" />
@@ -28,7 +29,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="대회 기간"/>
+            android:text="대회 날짜"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="종목"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -38,7 +44,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="신청 자격"/>
+            android:text="자격"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -48,7 +54,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="수상"/>
+            android:text="상금"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="기타"/>
 
 
 

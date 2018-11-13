@@ -13,15 +13,7 @@
          setContentView(R.layout.activity_main_setting);
      }
 
-     public void onButton_setting_alarm(View v) {
-         Intent intent = new Intent(getApplicationContext(), setting_alarm.class);
-         startActivity(intent);
-     }
 
-     public void onButton_setting_login(View v) {
-         Intent intent = new Intent(getApplicationContext(), setting_login.class);
-         startActivity(intent);
-     }
      public void onButton_setting_market(View v) {
          Intent intent = new Intent(getApplicationContext(), setting_market.class);
          startActivity(intent);

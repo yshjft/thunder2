@@ -110,7 +110,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="특정게임 전용 좌석 입력"/>
+            android:text="특정게임 전용 좌석 수 입력" />
 
         <EditText
             android:layout_width="match_parent"
@@ -126,10 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="빈자리/총자리"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:text=" 사용하지 않는 자리 : "/>
+
         <Button
             android:id="@+id/comfirm_button"
             android:layout_width="384dp"
