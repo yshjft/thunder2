@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 
 public class maps extends AppCompatActivity
@@ -169,6 +170,8 @@ public class maps extends AppCompatActivity
 
         mGoogleMap = googleMap;
 
+        //static초기화
+        count = 0;
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
@@ -246,16 +249,29 @@ public class maps extends AppCompatActivity
         mLatitude = location.getLatitude();
 
         if(count == 0) {
-
+            Random random = new Random();
+            int ran = random.nextInt(10);
             MarkerOptions markerOptions;
 
-            markerOptions = new MarkerOptions();
-            markerOptions
-                    .position(new LatLng(mLatitude + Math.random() / 100, mLongitude + Math.random() / 100))
-                    .title("PC방")
-                    .snippet("울랄라PC방")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-            mGoogleMap.addMarker(markerOptions);
+            for(int i=0;i<ran;i++) {
+                int buho1, buho2;
+                if(random.nextBoolean() == true)
+                    buho1 = 1;
+                else
+                    buho1 = -1;
+                if(random.nextBoolean() == true)
+                    buho2 = 1;
+                else
+                    buho2 = -1;
+
+                markerOptions = new MarkerOptions();
+                markerOptions
+                        .position(new LatLng(mLatitude + (Math.random() / 80 * buho1), mLongitude + Math.random() / 80 * buho2))
+                        .title("PC방")
+                        .snippet("울랄라PC방")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                mGoogleMap.addMarker(markerOptions);
+            }
             count++;
         }
 
