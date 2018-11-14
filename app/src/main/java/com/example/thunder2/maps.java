@@ -59,6 +59,9 @@ public class maps extends AppCompatActivity
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
 
+    double mLatitude;
+    double mLongitude;
+
     private AppCompatActivity mActivity;
     boolean askPermissionOnceAgain = false;
     boolean mRequestingLocationUpdates = false;
@@ -66,6 +69,8 @@ public class maps extends AppCompatActivity
     boolean mMoveMapByUser = true;
     boolean mMoveMapByAPI = true;
     LatLng currentPosition;
+
+    static int count = 0;
 
     LocationRequest locationRequest = new LocationRequest()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -169,6 +174,8 @@ public class maps extends AppCompatActivity
         //지도의 초기위치를 서울로 이동
         setDefaultLocation();
 
+        LatLng sub = new LatLng(mLatitude + Math.random() / 1000.0, mLongitude + Math.random() / 1000.0);
+
         //mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
@@ -228,9 +235,30 @@ public class maps extends AppCompatActivity
 
         Log.d(TAG, "onLocationChanged : ");
 
-        String markerTitle = getCurrentAddress(currentPosition);
-        String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
-                + " 경도:" + String.valueOf(location.getLongitude());
+
+        String markerTitle = "";
+        String markerSnippet = "";
+        //String markerTitle = getCurrentAddress(currentPosition);
+        //String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
+        //      + " 경도:" + String.valueOf(location.getLongitude());
+
+        mLongitude = location.getLongitude();
+        mLatitude = location.getLatitude();
+
+        if(count == 0) {
+
+            MarkerOptions markerOptions;
+
+            markerOptions = new MarkerOptions();
+            markerOptions
+                    .position(new LatLng(mLatitude + Math.random() / 100, mLongitude + Math.random() / 100))
+                    .title("PC방")
+                    .snippet("울랄라PC방")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+            mGoogleMap.addMarker(markerOptions);
+            count++;
+        }
+
 
         //현재 위치에 마커 생성하고 이동
         setCurrentLocation(location, markerTitle, markerSnippet);
