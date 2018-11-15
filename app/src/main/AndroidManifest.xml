@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+
+    <!--지도를 각자의 컴퓨터에서 확인하려면 개인 api키가 있어야 합니다-->
+
     <application
 
         android:allowBackup="true"
@@ -17,7 +20,9 @@
         tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBHLr6WuXElm5RbH6pV2zRyWB8rhPyzVmM" />
+            android:value="AIzaSyDcB7hsIL1l_vt4rpUeVyvZviTm14fOm-k"/>   <!--홍유석 api_key-->
+            <!--android:value="AIzaSyBHLr6WuXElm5RbH6pV2zRyWB8rhPyzVmM" 현석이형 api_key-->
+            />
 
         <activity android:name=".MainActivity">
             <intent-filter>
