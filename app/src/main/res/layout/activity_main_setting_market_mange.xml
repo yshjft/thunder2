@@ -9,29 +9,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="PC방 이름 입력"/>
+
+
+
+
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="20dp"
             android:text="사진은 3장을 첨부해주세요!!"
             android:textColor="#ffff0000"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="288dp"
             android:layout_gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/pc1"
                 android:layout_width="398dp"
-                android:layout_height="210dp"
+                android:layout_height="248dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:maxHeight="200dp"
@@ -49,14 +48,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="288dp"
             android:layout_gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/pc2"
                 android:layout_width="398dp"
-                android:layout_height="210dp"
+                android:layout_height="248dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:maxHeight="200dp"
@@ -74,14 +73,14 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="288dp"
             android:layout_gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/pc3"
                 android:layout_width="398dp"
-                android:layout_height="210dp"
+                android:layout_height="248dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:maxHeight="200dp"
@@ -98,37 +97,64 @@
                 android:onClick="onButton_pc3"/>
         </LinearLayout>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:text="공지사항 입력"/>
-
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="PC방 좌석 수 입력"/>
-
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="특정게임 전용 좌석 수 입력" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="PC방 컴퓨터 사양 입력"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="PC방 상세 주소 입력"/>
 
         <TextView
             android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="PC방 이름 입력"/>
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="빈자리/총자리"/>
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="PC방 주소 입력"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="PC방 총자리 입력"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="PC방 특정 게임 전용 좌석 입력"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="PC방 컴퓨터 사양 입력"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="PC방 공지사항 입력"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            />
+
 
         <Button
             android:id="@+id/comfirm_button"
