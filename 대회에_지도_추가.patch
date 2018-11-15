@@ -1,0 +1,89 @@
+Index: app/src/main/java/com/example/thunder2/aboutContest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/thunder2/aboutContest.java	(revision 29c157dc50671ed30ae408680521c4c2352b3081)
++++ app/src/main/java/com/example/thunder2/aboutContest.java	(date 1542265132402)
+@@ -3,12 +3,49 @@
+ import android.os.Bundle;
+ import android.support.v7.app.AppCompatActivity;
+ 
+-public class aboutContest extends AppCompatActivity {
++import com.google.android.gms.maps.CameraUpdateFactory;
++import com.google.android.gms.maps.GoogleMap;
++import com.google.android.gms.maps.OnMapReadyCallback;
++import com.google.android.gms.maps.SupportMapFragment;
++import com.google.android.gms.maps.model.LatLng;
++import com.google.android.gms.maps.model.MarkerOptions;
++
++public class aboutContest extends AppCompatActivity
++        implements OnMapReadyCallback {
++
++    private GoogleMap mMap;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main_contestinformation_aboutcontest);
++
++        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
++                .findFragmentById(R.id.map);
++        mapFragment.getMapAsync(this);
++
+     }
++
++    public void onMapReady(final GoogleMap map) {
++        double mLatitude = 37.225165;
++        double mLongitude = 127.187141;
++
++        mMap = map;
++
++        LatLng now = new LatLng(mLatitude, mLongitude);   //현재 위치
++
++        MarkerOptions marketOptions = new MarkerOptions();
++
++        marketOptions.position(now);    //지금 위치로 포지션
++        marketOptions.title("PC방");
++        marketOptions.snippet("레볼루션 PC방");
++        mMap.addMarker(marketOptions);
++
++        mMap.moveCamera(CameraUpdateFactory.newLatLng(now));
++
++        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
++    }
++
++
+ 
+ }
+Index: app/src/main/res/layout/activity_main_contestinformation_aboutcontest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main_contestinformation_aboutcontest.xml	(revision 29c157dc50671ed30ae408680521c4c2352b3081)
++++ app/src/main/res/layout/activity_main_contestinformation_aboutcontest.xml	(date 1542264968391)
+@@ -61,11 +61,17 @@
+             android:layout_height="100dp"
+             android:text="기타"/>
+ 
+-
+-
+-
+-
+-
++        <fragment
++            android:layout_width="match_parent"
++            android:layout_height="300dp"
++            android:layout_marginTop="10dp"
++            android:layout_marginBottom="10dp"
++            android:layout_marginEnd="10dp"
++            android:layout_marginStart="10dp"
++            android:id="@+id/map"
++            android:name="com.google.android.gms.maps.SupportMapFragment"
++            class="com.google.android.gms.maps.SupportMapFragment"
++            />
+ 
+     </LinearLayout>
+ </ScrollView>
+\ No newline at end of file
