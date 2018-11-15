@@ -59,12 +59,12 @@ import java.util.ArrayList;
          startActivity(intent);
      }
 
-
+    /*
      public void onButton_map(View v) {
          Intent intent = new Intent(getApplicationContext(), maps.class);
          startActivity(intent);
      }
-
+*/
 
      private void init() {
          DataForm_forPC a = new DataForm_forPC("넥스트");
