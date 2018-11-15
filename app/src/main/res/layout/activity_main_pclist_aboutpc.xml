@@ -19,36 +19,88 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="25dp"
             android:text="PC방 이름 : " />
+        <TextView
+            android:id="@+id/pc_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+             />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="PC방 위치 : " />
+            android:layout_height="25dp"
+            android:text="PC방 주소 : " />
+        <TextView
+            android:id="@+id/pc_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            />
+
+
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="총자리"/>
+        <TextView
+            android:id="@+id/pc_seatTotal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="남은 자리"/>
+        <TextView
+            android:id="@+id/pc_seatUnuse"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="특정 게임 전용 좌석 : " />
+        <TextView
+            android:id="@+id/pc_seatKind"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="특정 게임 전용 좌석 : " />
+            />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="빈자리/총자리"/>
+
 
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="25dp"
             android:text="PC방 컴퓨터 사양 : "/>
+        <TextView
+            android:id="@+id/pc_spec"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            />
+
+
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="25dp"
             android:text="PC방 공지사항 : " />
+        <TextView
+            android:id="@+id/pc_notice"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            />
 
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="지도 : " />
         <fragment
             android:layout_width="match_parent"
             android:layout_height="300dp"

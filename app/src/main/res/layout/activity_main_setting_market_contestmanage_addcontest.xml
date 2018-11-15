@@ -37,45 +37,91 @@
                 android:onClick="add_contest_image"/>
         </LinearLayout>
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="20dp"
             android:text="대회 이름 입력"/>
-
-
         <EditText
+            android:id="@+id/contest_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
             android:text="대회 장소 입력"/>
-
-
         <EditText
+            android:id="@+id/contest_place"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="대회 기간 입력"/>
+            />
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 날짜 입력"/>
         <EditText
+            android:id="@+id/contest_date"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="신청 기간 입력"/>
+            />
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 신청기간 입력"/>
         <EditText
+            android:id="@+id/contest_deadline"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="신청 자격 입력"/>
+            />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 종목 입력"/>
+        <!--아마도 스피너-->
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 상금 입력"/>
         <EditText
+            android:id="@+id/contest_prize"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="참여 방법 입력"/>
+            />
 
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 참가 자격 입력"/>
         <EditText
+            android:id="@+id/contest_qual"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="수상 입력"/>
+            />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 기타 사항 입력"/>
+        <EditText
+            android:id="@+id/contest_etc"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            />
 
         <Button
             android:id="@+id/correction_button"

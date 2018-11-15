@@ -43,7 +43,6 @@
         <activity android:name=".setting_market_contestManage_correction" />
         <activity android:name=".setting_market_contestManage_addContest" />
         <activity android:name=".list_contest" />
-        <activity android:name=".maps"></activity>
     </application>
 
 </manifest>

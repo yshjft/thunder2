@@ -18,49 +18,119 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="대회 이름"/>
+            android:layout_height="25dp"
+            android:text="대회 이름"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        <TextView
+            android:id="@+id/contest_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="대회 장소"/>
+            android:layout_height="25dp"
+            android:text="대회 장소"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+        <TextView
+            android:id="@+id/contest_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+
+
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="25dp"
             android:text="대회 날짜"/>
+        <TextView
+            android:id="@+id/contest_date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="25dp"
+            android:text="대회 신청기간"/>
+        <TextView
+            android:id="@+id/contest_deadline"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
             android:text="종목"/>
+        <TextView
+            android:id="@+id/contest_event"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+
+
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="신청 기간"/>
-
+            android:layout_height="25dp"
+            android:text="대회 참가 방법"/>
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="자격"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="참여방법"/>
-
-        <TextView
+            android:id="@+id/contest_how"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="상금"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
 
         <TextView
             android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="대회 상금"/>
+        <TextView
+            android:id="@+id/contest_prize"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="대회 참가 자격"/>
+        <TextView
+            android:id="@+id/contest_qual"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
             android:text="기타"/>
+        <TextView
+            android:id="@+id/contest_etc"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            />
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="지도"/>
         <fragment
             android:layout_width="match_parent"
             android:layout_height="300dp"
