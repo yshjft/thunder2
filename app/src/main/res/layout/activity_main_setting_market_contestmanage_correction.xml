@@ -85,7 +85,11 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:text="대회 종목 수정"/>
-        <!--아마도 스피너-->
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/game_event"/>
 
 
 

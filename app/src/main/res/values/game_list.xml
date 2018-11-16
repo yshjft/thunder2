@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="game_event">
+        <item>리그오브레전드</item>
+        <item>배틀그라운드</item>
+        <item>포트나이트</item>
+        <item>오버워치</item>
+        <item>스타크래프트</item>
+        <item>기타</item>
+    </string-array>
+
+</resources>
