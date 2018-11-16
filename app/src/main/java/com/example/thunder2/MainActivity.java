@@ -63,7 +63,7 @@ import java.util.ArrayList;
              Toast.makeText(this,"인터넷 체크 완료",Toast.LENGTH_LONG).show();
          } else {
              Log.i("연결 안 됨" , "연결이 다시 한번 확인해주세요");
-             Toast.makeText(this,"인터넷을 확인해주세요되었습니다.",Toast.LENGTH_LONG).show();
+             Toast.makeText(this,"인터넷을 확인해주세요",Toast.LENGTH_LONG).show();
              AlertDialog.Builder gsDialog = new AlertDialog.Builder(this);
              gsDialog.setTitle("인터넷 설정");
              gsDialog.setMessage("인터넷 기능을 설정하시겠습니까?");
