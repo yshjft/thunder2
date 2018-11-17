@@ -45,17 +45,35 @@ import java.util.ArrayList;
          Intent intent = new Intent(this, LoadingActivity.class);
          startActivity(intent);
 
-         if(chkGpsService() == false){
-             Toast.makeText(this,"GPS가 꺼져있습니다.",Toast.LENGTH_LONG).show();
-         }
-         else{
-             Toast.makeText(this,"GPS 체크 완료",Toast.LENGTH_LONG).show();
-         }
 
          ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
          NetworkInfo mobile = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
          NetworkInfo wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
+         LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+         if(!locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))){
+             Toast.makeText(this,"GPS 연결 안됨",Toast.LENGTH_LONG).show();
+             Toast.makeText(this,"GPS를 확인해주세요",Toast.LENGTH_LONG).show();
+             AlertDialog.Builder gpsDialog = new AlertDialog.Builder(this);
+             gpsDialog.setTitle("GPS 설정");
+             gpsDialog.setMessage("GPS 기능을 설정하시겠습니까?");
+             gpsDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int which) {
+                     // GPS설정 화면으로 이동
+                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                     intent.addCategory(Intent.CATEGORY_DEFAULT);
+                     startActivity(intent);
+                 }
+             })
+                     .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                         public void onClick(DialogInterface dialog, int which) {
+                             return;
+                         }
+                     }).create().show();
+         }
+         else{
+             Toast.makeText(this,"GPS 체크 완료",Toast.LENGTH_LONG).show();
+         }
 
          // wifi 또는 모바일 네트워크 어느 하나라도 연결이 되어있다면,
          if (wifi.isConnected() || mobile.isConnected()) {
@@ -64,10 +82,10 @@ import java.util.ArrayList;
          } else {
              Log.i("연결 안 됨" , "연결이 다시 한번 확인해주세요");
              Toast.makeText(this,"인터넷을 확인해주세요",Toast.LENGTH_LONG).show();
-             AlertDialog.Builder gsDialog = new AlertDialog.Builder(this);
-             gsDialog.setTitle("인터넷 설정");
-             gsDialog.setMessage("인터넷 기능을 설정하시겠습니까?");
-             gsDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+             AlertDialog.Builder intDialog = new AlertDialog.Builder(this);
+             intDialog.setTitle("인터넷 설정");
+             intDialog.setMessage("인터넷 기능을 설정하시겠습니까?");
+             intDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                  public void onClick(DialogInterface dialog, int which) {
                      // GPS설정 화면으로 이동
                      Intent intent = new Intent(Settings.ACTION_WIFI_IP_SETTINGS);
@@ -92,37 +110,6 @@ import java.util.ArrayList;
          rcv.setAdapter(rcvAdapter);
      }
 
-     private boolean chkGpsService() {
-
-         String gps = android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-
-         Log.d(gps, "aaaa");
-
-         if (!(gps.matches(".*gps.*") && gps.matches(".*network.*"))) {
-
-             // GPS OFF 일때 Dialog 표시
-             AlertDialog.Builder gsDialog = new AlertDialog.Builder(this);
-             gsDialog.setTitle("위치 서비스 설정");
-             gsDialog.setMessage("무선 네트워크 사용, GPS 위성 사용을 모두 체크하셔야 정확한 위치 서비스가 가능합니다.\n위치 서비스 기능을 설정하시겠습니까?");
-             gsDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                 public void onClick(DialogInterface dialog, int which) {
-                     // GPS설정 화면으로 이동
-                     Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                     intent.addCategory(Intent.CATEGORY_DEFAULT);
-                     startActivity(intent);
-                 }
-             })
-                     .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                         public void onClick(DialogInterface dialog, int which) {
-                             return;
-                         }
-                     }).create().show();
-             return false;
-
-         } else {
-             return true;
-         }
-     }
 
 
 
