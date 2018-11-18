@@ -8,35 +8,42 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 
  public class MainActivity extends AppCompatActivity {
 
-     private Button btnShowLocation;
-     private TextView txtLat;
-     private TextView txtLon;
-     private final int PERMISSIONS_ACCESS_FINE_LOCATION = 1000;
-     private final int PERMISSIONS_ACCESS_COARSE_LOCATION = 1001;
-     private boolean isAccessFineLocation = false;
-     private boolean isAccessCoarseLocation = false;
-     private boolean isPermission = false;
+     //파이어베이스 시작
+     private DatabaseReference mDatabase;
+     //파이어베이스 끝
 
-     LocationManager locationManager;
+     //LocationManager locationManager;
+
+     //리사이클러뷰 시작
      RecyclerView rcv;
      RcvAdapter_forPC rcvAdapter;
-     ArrayList<DataForm_forPC> list = new ArrayList<>();
+     private ArrayList<DTOaboutPC> pcList = new ArrayList<>();
+     //ArrayList<DataForm_forPC> list = new ArrayList<>();
+     //리사이클러뷰 끝
+
+
+
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +52,13 @@ import java.util.ArrayList;
          Intent intent = new Intent(this, LoadingActivity.class);
          startActivity(intent);
 
+         mDatabase=FirebaseDatabase
+                 .getInstance()
+                 .getReference()
+                 .child("PCL");
 
+
+         //인터넷, GPS 연결 확인 부분 시작
          ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
          NetworkInfo mobile = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
          NetworkInfo wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -99,18 +112,35 @@ import java.util.ArrayList;
                          }
                      }).create().show();
          }
+         //인터넷, GPS 연결 확인 부분 끝
 
 
-         init();
+
+
+
+
 
          rcv = (RecyclerView) findViewById(R.id.main_rcv);
          rcv.setLayoutManager(new LinearLayoutManager(this));
-
-         rcvAdapter = new RcvAdapter_forPC(this, list);
+         rcvAdapter = new RcvAdapter_forPC(this, pcList);
          rcv.setAdapter(rcvAdapter);
+
+         mDatabase.addValueEventListener(new ValueEventListener() {
+             @Override
+             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                 pcList.clear();
+                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                     pcList.add(snapshot.getValue(DTOaboutPC.class));
+                 }
+                 rcvAdapter.notifyDataSetChanged();
+             }
+
+             @Override
+             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+             }
+         });
      }
-
-
 
 
      public void onButton_contest(View v) {
@@ -123,30 +153,6 @@ import java.util.ArrayList;
          startActivity(intent);
      }
 
-    
-     private void init() {
-         DataForm_forPC a = new DataForm_forPC("넥스트");
-         list.add(a);
 
-         a = new DataForm_forPC("고릴라");
-         list.add(a);
 
-         a = new DataForm_forPC("조이칸");
-         list.add(a);
-
-         a = new DataForm_forPC("큐브");
-         list.add(a);
-
-         a = new DataForm_forPC("해라");
-         list.add(a);
-
-         a = new DataForm_forPC("인디고");
-         list.add(a);
-
-         a = new DataForm_forPC("스타덤");
-         list.add(a);
-
-         a = new DataForm_forPC("다락");
-         list.add(a);
-     }
  }

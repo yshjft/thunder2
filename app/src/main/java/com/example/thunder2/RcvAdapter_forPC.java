@@ -2,6 +2,7 @@ package com.example.thunder2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +10,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class RcvAdapter_forPC extends RecyclerView.Adapter<RcvAdapter_forPC.ViewHolder> {
     private Context mContext;
-    private ArrayList<DataForm_forPC> dataList;
+    private ArrayList<DTOaboutPC> dataList;
+    private DatabaseReference mDatabase;
+    //private ArrayList<DataForm_forPC> dataList;
 
-
-    public RcvAdapter_forPC(Context mContext, ArrayList<DataForm_forPC> dataList) {
+    public RcvAdapter_forPC(Context mContext, ArrayList<DTOaboutPC> dataList) {
         this.mContext = mContext;
         this.dataList = dataList;
     }
@@ -25,7 +32,6 @@ public class RcvAdapter_forPC extends RecyclerView.Adapter<RcvAdapter_forPC.View
     public int getItemCount() {
         return dataList.size();
     }
-
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_forpc, parent, false);
