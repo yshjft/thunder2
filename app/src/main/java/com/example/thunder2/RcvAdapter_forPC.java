@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class RcvAdapter_forPC extends RecyclerView.Adapter<RcvAdapter_forPC.View
     private Context mContext;
     private ArrayList<DTOaboutPC> dataList;
     private DatabaseReference mDatabase;
+    static final String TAG = "FUCKYOUANDROID";
     //private ArrayList<DataForm_forPC> dataList;
 
     public RcvAdapter_forPC(Context mContext, ArrayList<DTOaboutPC> dataList) {
@@ -50,13 +52,37 @@ public class RcvAdapter_forPC extends RecyclerView.Adapter<RcvAdapter_forPC.View
 
             tvName = (TextView) itemView.findViewById(R.id.item_tv_name);
 
+//            for(DTOaboutPC PCROOM : dataList){
+//                itemView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Intent intent= new Intent(mContext, aboutPC.class);
+//
+//                }
+//                });
+//
+//            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    Intent intent= new Intent(mContext, aboutPC.class);
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext,aboutPC.class);
+                    intent.putExtra("stringLocation",dataList.get(getAdapterPosition()).getLocation());
+                    intent.putExtra("stringSeatkind", dataList.get(getAdapterPosition()).getSeatKind());
+                    intent.putExtra("intSeatTotal", dataList.get(getAdapterPosition()).getSeat_total());
+                    intent.putExtra("stringSpec", dataList.get(getAdapterPosition()).getSpec());
+                    intent.putExtra("stringName", dataList.get(getAdapterPosition()).getName());
+                    intent.putExtra("stringNotice", dataList.get(getAdapterPosition()).getNotice());
+
+                    Log.d(TAG, "onClick: "+dataList.get(getAdapterPosition()).getSeatKind());
+                    Log.d(TAG, "onClick: "+dataList.get(getAdapterPosition()).getSeat_total());
                     mContext.startActivity(intent);
                 }
             });
+
+
+
+
+
 //
 //            itemView.setOnLongClickListener(new View.OnLongClickListener() {
 //                @Override

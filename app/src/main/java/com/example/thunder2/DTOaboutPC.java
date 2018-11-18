@@ -2,7 +2,7 @@ package com.example.thunder2;
 
 public class DTOaboutPC {
     private String Location;
-    private String seatKind;
+    private String SeatKind;
     private int Seat_total;
     private String Spec;
     private String name;
@@ -13,7 +13,7 @@ public class DTOaboutPC {
 
     public DTOaboutPC(String location, String seatKind, int seat_total, String spec, String name, String notice) {
         Location = location;
-        this.seatKind = seatKind;
+        SeatKind = seatKind;
         Seat_total = seat_total;
         Spec = spec;
         this.name = name;
@@ -29,11 +29,11 @@ public class DTOaboutPC {
     }
 
     public String getSeatKind() {
-        return seatKind;
+        return SeatKind;
     }
 
     public void setSeatKind(String seatKind) {
-        this.seatKind = seatKind;
+        SeatKind = seatKind;
     }
 
     public int getSeat_total() {
@@ -67,14 +67,4 @@ public class DTOaboutPC {
     public void setNotice(String notice) {
         this.notice = notice;
     }
-
-
-
-
-
-
-
-
-
-
 }

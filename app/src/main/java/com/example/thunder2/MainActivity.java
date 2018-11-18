@@ -33,13 +33,11 @@ import java.util.ArrayList;
      private DatabaseReference mDatabase;
      //파이어베이스 끝
 
-     //LocationManager locationManager;
 
      //리사이클러뷰 시작
      RecyclerView rcv;
      RcvAdapter_forPC rcvAdapter;
      private ArrayList<DTOaboutPC> pcList = new ArrayList<>();
-     //ArrayList<DataForm_forPC> list = new ArrayList<>();
      //리사이클러뷰 끝
 
 
@@ -122,6 +120,7 @@ import java.util.ArrayList;
 
          rcv = (RecyclerView) findViewById(R.id.main_rcv);
          rcv.setLayoutManager(new LinearLayoutManager(this));
+         //정렬 가능할까??
          rcvAdapter = new RcvAdapter_forPC(this, pcList);
          rcv.setAdapter(rcvAdapter);
 
