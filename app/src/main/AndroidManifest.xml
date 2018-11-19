@@ -5,13 +5,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
-
-    <!--지도를 각자의 컴퓨터에서 확인하려면 개인 api키가 있어야 합니다-->
-
+    <!-- 지도를 각자의 컴퓨터에서 확인하려면 개인 api키가 있어야 합니다 -->
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,10 +18,9 @@
         tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDcB7hsIL1l_vt4rpUeVyvZviTm14fOm-k"/>   <!--홍유석 api_key-->
-            <!--android:value="AIzaSyBHLr6WuXElm5RbH6pV2zRyWB8rhPyzVmM" 현석이형 api_key-->
-            />
-
+            android:value="AIzaSyDcB7hsIL1l_vt4rpUeVyvZviTm14fOm-k" /> <!-- 홍유석 api_key -->
+        <!-- android:value="AIzaSyBHLr6WuXElm5RbH6pV2zRyWB8rhPyzVmM" 현석이형 api_key -->
+        />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,6 +40,8 @@
         <activity android:name=".setting_market_contestManage_correction" />
         <activity android:name=".setting_market_contestManage_addContest" />
         <activity android:name=".list_contest" />
+        <activity android:name=".SignIn" />
+        <activity android:name=".SignUp"></activity>
     </application>
 
 </manifest>

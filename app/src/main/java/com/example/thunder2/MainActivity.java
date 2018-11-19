@@ -156,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onButton_setting(View v) {
-        Intent intent = new Intent(getApplicationContext(), setting.class);
+    public void onButton_SignIn(View v) {
+        Intent intent = new Intent(getApplicationContext(), SignIn.class);
         startActivity(intent);
     }
 
