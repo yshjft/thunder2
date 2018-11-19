@@ -38,7 +38,7 @@ public class aboutPC extends FragmentActivity
     //이미지에 관한 리사이클러뷰 시작
 
     private GoogleMap mMap;
-    public String locationName; //주소 스트링 값
+    private String locationName; //주소 스트링 값
     private double mlat;//위도 전달
     private double mlng;//경도 전달
     private String pcRooomName;//PC방 이름 전달

@@ -10,11 +10,13 @@ public class DTOaboutContest {
     private String Location;
     private String Name;
     private String Prize;
-    private int qual; //나이를 숫자로 입력하도록 설정
+    private String Quali; //나이를 숫자로 입력하도록 설정
 
+    public DTOaboutContest() {
 
+    }
 
-    public DTOaboutContest(String date, String deadline, String ETC, String event, String host, String how, String location, String name, String prize, int qual) {
+    public DTOaboutContest(String date, String deadline, String ETC, String event, String host, String how, String location, String name, String prize, String quali) {
         Date = date;
         Deadline = deadline;
         this.ETC = ETC;
@@ -24,7 +26,7 @@ public class DTOaboutContest {
         Location = location;
         Name = name;
         Prize = prize;
-        this.qual = qual;
+        Quali = quali;
     }
 
     public String getDate() {
@@ -99,13 +101,13 @@ public class DTOaboutContest {
         Prize = prize;
     }
 
-    public int getQual() {
-        return qual;
+    public String getQuali() {
+        return Quali;
     }
 
-    public void setQual(int qual) {
-        this.qual = qual;
+    public void setQuali(String quali) {
+        Quali = quali;
     }
-
-
 }
+
+

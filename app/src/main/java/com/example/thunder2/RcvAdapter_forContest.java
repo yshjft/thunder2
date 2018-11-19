@@ -3,6 +3,7 @@ package com.example.thunder2;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,12 @@ import java.util.ArrayList;
 public class RcvAdapter_forContest extends RecyclerView.Adapter<RcvAdapter_forContest.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<DataForm_forContest> dataList;
+    private ArrayList<DTOaboutContest> dataList;
+
+    public final static String TAG="dddd";
 
 
-    public RcvAdapter_forContest(Context mContext, ArrayList<DataForm_forContest> dataList) {
+    public RcvAdapter_forContest(Context mContext, ArrayList<DTOaboutContest> dataList) {
         this.mContext = mContext;
         this.dataList = dataList;
     }
@@ -46,6 +49,16 @@ public class RcvAdapter_forContest extends RecyclerView.Adapter<RcvAdapter_forCo
                 @Override
                 public void onClick(View view) {
                     Intent intent= new Intent(mContext, aboutContest.class);
+                    intent.putExtra("stringDate",dataList.get(getAdapterPosition()).getDate());
+                    intent.putExtra("stringDeadline", dataList.get(getAdapterPosition()).getDeadline());
+                    intent.putExtra("stringETC", dataList.get(getAdapterPosition()).getETC());
+                    intent.putExtra("stringEvent", dataList.get(getAdapterPosition()).getEvent());
+                    intent.putExtra("stringHost", dataList.get(getAdapterPosition()).getHost());
+                    intent.putExtra("stringHow", dataList.get(getAdapterPosition()).getHow());
+                    intent.putExtra("stringLocation", dataList.get(getAdapterPosition()).getLocation());
+                    intent.putExtra("stringName", dataList.get(getAdapterPosition()).getName());
+                    intent.putExtra("stringPrize", dataList.get(getAdapterPosition()).getPrize());
+                    intent.putExtra("stringQualification", dataList.get(getAdapterPosition()).getQuali());
                     mContext.startActivity(intent);
                 }
             });
@@ -55,7 +68,7 @@ public class RcvAdapter_forContest extends RecyclerView.Adapter<RcvAdapter_forCo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        holder.tvName.setText(dataList.get(position).getContest_name());
+        holder.tvName.setText(dataList.get(position).getName());
     }
 
 //    private void removeItem(int position) {

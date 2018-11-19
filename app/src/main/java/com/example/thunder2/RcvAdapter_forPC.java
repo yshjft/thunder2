@@ -52,16 +52,7 @@ public class RcvAdapter_forPC extends RecyclerView.Adapter<RcvAdapter_forPC.View
 
             tvName = (TextView) itemView.findViewById(R.id.item_tv_name);
 
-//            for(DTOaboutPC PCROOM : dataList){
-//                itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Intent intent= new Intent(mContext, aboutPC.class);
-//
-//                }
-//                });
-//
-//            }
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
