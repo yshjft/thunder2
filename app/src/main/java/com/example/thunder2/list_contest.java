@@ -1,9 +1,11 @@
  package com.example.thunder2;
 
+ import android.graphics.Color;
  import android.os.Bundle;
  import android.support.v7.app.AppCompatActivity;
  import android.support.v7.widget.LinearLayoutManager;
  import android.support.v7.widget.RecyclerView;
+ import android.support.v7.widget.Toolbar;
  import android.view.View;
  import android.widget.AdapterView;
  import android.widget.Spinner;
@@ -23,6 +25,17 @@
          setContentView(R.layout.activity_main_contestinformation);
 
          init();
+
+         //초기화
+         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+
+         //툴바 설정
+         toolbar.setTitleTextColor(Color.parseColor("#000000")); //제목의 칼라
+         toolbar.setBackgroundColor(Color.parseColor("#ffffff"));   //툴바컬러
+         toolbar.setTitle("메인 화면");  //주제목 넣기
+         // toolbar.setSubtitle("Main"); //부제목 넣기
+         //toolbar.setNavigationIcon(R.mipmap.ic_launcher); //제목앞에 아이콘 넣기
+         setSupportActionBar(toolbar); //툴바를 액션바와 같게 만들어 준다.
 
          rcv = (RecyclerView) findViewById(R.id.contest_rcv1);
          rcv.setLayoutManager(new LinearLayoutManager(this));
