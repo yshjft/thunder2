@@ -4,6 +4,8 @@ package com.example.thunder2;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -26,8 +28,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -44,10 +47,19 @@ public class MainActivity extends AppCompatActivity {
     //리사이클러뷰 끝
 
 
-    private int limitDistance=600;
-    Location location;
-    double lat;
-    double lon;
+    //거리제한(600m)
+    private double limitDistance=600;
+    private double distance;
+    double mlatitude;//내 위도
+    double mlongitude;//내 경도
+    double pcLat; //pc방 위도
+    double pcLng; //pc방 경도
+    //거리제한(600m)
+
+
+    Context mContext=this;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
+
+        startLocationService();
+
+
+
 
         mDatabase=FirebaseDatabase
                 .getInstance()
@@ -67,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo mobile = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         NetworkInfo wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-        LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+        final LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
         if(!locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))){
             Toast.makeText(this,"GPS 연결 안됨",Toast.LENGTH_LONG).show();
             Toast.makeText(this,"GPS를 확인해주세요",Toast.LENGTH_LONG).show();
@@ -118,8 +135,6 @@ public class MainActivity extends AppCompatActivity {
         }
         //인터넷, GPS 연결 확인 부분 끝
 
-
-
         rcv = (RecyclerView) findViewById(R.id.main_rcv);
         rcv.setLayoutManager(new LinearLayoutManager(this));
         rcvAdapter = new RcvAdapter_forPC(this, pcList);
@@ -129,15 +144,39 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 pcList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    pcList.add(snapshot.getValue(DTOaboutPC.class));
-                }
-                //필터링시작
-                //내위치를 구한다.
-                //600m 반경으로 구한다.
-                //
 
-                //필터링끝
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+
+                    String location=snapshot.getValue(DTOaboutPC.class).getLocation();
+
+                    Geocoder mGeoCoder = new Geocoder(mContext);
+                    try{
+                        List<Address> mResultLocation=mGeoCoder.getFromLocationName(location,1);
+                        double Lat=mResultLocation.get(0).getLatitude();
+                        pcLat =Lat;
+                        double Lng=mResultLocation.get(0).getLongitude();
+                        pcLng=Lng;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(mContext, "주소를 변환할 수 없습니다.", Toast.LENGTH_SHORT);
+                    }
+
+                    Location myLocation=new Location("point_of_me");
+                    myLocation.setLatitude(mlatitude);
+                    myLocation.setLongitude(mlongitude);
+
+                    Location pcLocation= new Location("point_of_pc");
+                    pcLocation.setLatitude(pcLat);
+                    pcLocation.setLongitude(pcLng);
+
+                    distance=myLocation.distanceTo(pcLocation);
+
+                    if(distance<=limitDistance){
+                        pcList.add(snapshot.getValue(DTOaboutPC.class));
+                    }
+                }
+
                 rcvAdapter.notifyDataSetChanged();
             }
 
@@ -148,7 +187,49 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void startLocationService() {
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        GPSListener gpsListener = new GPSListener();
+        long minTime = 10000;
+        float minDistance = 0;
 
+        try {
+            // GPS를 이용한 위치 요청
+            manager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    minTime,
+                    minDistance,
+                    gpsListener);
+
+            // 네트워크를 이용한 위치 요청
+            manager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER,
+                    minTime,
+                    minDistance,
+                    gpsListener);
+
+
+            Location lastLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (lastLocation != null) {
+                mlatitude = lastLocation.getLatitude();
+                mlongitude = lastLocation.getLongitude();
+            }
+        } catch(SecurityException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+
+    private class GPSListener implements LocationListener {
+        public void onLocationChanged(Location location) {
+            mlatitude = location.getLatitude();
+            mlongitude = location.getLongitude();
+        }
+        public void onProviderDisabled(String provider) { }
+        public void onProviderEnabled(String provider) { }
+        public void onStatusChanged(String provider, int status, Bundle extras) { }
+    }
 
 
     public void onButton_contest(View v) {
@@ -161,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
 }
+
+
+

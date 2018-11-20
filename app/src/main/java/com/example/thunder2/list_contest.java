@@ -17,6 +17,14 @@
 
  import java.util.ArrayList;
 
+ /*리그오브 레전드 0
+   배틀그라운드 1
+   포트나이트 2
+   오버워치 3
+   스타크래프트 4
+   기타 5
+  */
+
  public class list_contest extends AppCompatActivity {
 
      RecyclerView rcv;
@@ -43,35 +51,121 @@
          rcvAdapter = new RcvAdapter_forContest(this, contestList);
          rcv.setAdapter(rcvAdapter);
 
-         mDatabase.addValueEventListener(new ValueEventListener() {
-             @Override
-             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 contestList.clear();
-                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                     contestList.add(snapshot.getValue(DTOaboutContest.class));
-                 }
-                 //필터링시작
-
-                 //필터링끝
-                 rcvAdapter.notifyDataSetChanged();
-             }
-
-             @Override
-             public void onCancelled(@NonNull DatabaseError databaseError) {
-
-             }
-         });
+//         mDatabase.addValueEventListener(new ValueEventListener() {
+//             @Override
+//             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                 contestList.clear();
+//                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                     contestList.add(snapshot.getValue(DTOaboutContest.class));
+//                 }
+//                 rcvAdapter.notifyDataSetChanged();
+//             }
+//
+//             @Override
+//             public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//             }
+//         });
 
 
          Spinner s = (Spinner)findViewById(R.id.spinner);
          s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
-             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
-
+             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                 if(position==0){
+                     mDatabase.addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                             contestList.clear();
+                             for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                 if(0==snapshot.getValue(DTOaboutContest.class).getEvent()){
+                                     contestList.add(snapshot.getValue(DTOaboutContest.class));
+                                 }
+                             }
+                             rcvAdapter.notifyDataSetChanged();
+                         }
+                         @Override
+                         public void onCancelled(@NonNull DatabaseError databaseError) { }
+                     });
+                 }else if(position==1){
+                     mDatabase.addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                             contestList.clear();
+                             for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                 if(1==snapshot.getValue(DTOaboutContest.class).getEvent()){
+                                     contestList.add(snapshot.getValue(DTOaboutContest.class));
+                                 }
+                             }
+                             rcvAdapter.notifyDataSetChanged();
+                         }
+                         @Override
+                         public void onCancelled(@NonNull DatabaseError databaseError) { }
+                     });
+                 }else if(position==2){
+                     mDatabase.addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                             contestList.clear();
+                             for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                 if(2==snapshot.getValue(DTOaboutContest.class).getEvent()){
+                                     contestList.add(snapshot.getValue(DTOaboutContest.class));
+                                 }
+                             }
+                             rcvAdapter.notifyDataSetChanged();
+                         }
+                         @Override
+                         public void onCancelled(@NonNull DatabaseError databaseError) { }
+                     });
+                 }else if(position==3){
+                     mDatabase.addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                             contestList.clear();
+                             for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                 if(3==snapshot.getValue(DTOaboutContest.class).getEvent()){
+                                     contestList.add(snapshot.getValue(DTOaboutContest.class));
+                                 }
+                             }
+                             rcvAdapter.notifyDataSetChanged();
+                         }
+                         @Override
+                         public void onCancelled(@NonNull DatabaseError databaseError) { }
+                     });
+                 }else if(position==4){
+                     mDatabase.addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                             contestList.clear();
+                             for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                 if(4==snapshot.getValue(DTOaboutContest.class).getEvent()){
+                                     contestList.add(snapshot.getValue(DTOaboutContest.class));
+                                 }
+                             }
+                             rcvAdapter.notifyDataSetChanged();
+                         }
+                         @Override
+                         public void onCancelled(@NonNull DatabaseError databaseError) { }
+                     });
+                 }else if(position==5){
+                     mDatabase.addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                             contestList.clear();
+                             for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                 if(5==snapshot.getValue(DTOaboutContest.class).getEvent()){
+                                     contestList.add(snapshot.getValue(DTOaboutContest.class));
+                                 }
+                             }
+                             rcvAdapter.notifyDataSetChanged();
+                         }
+                         @Override
+                         public void onCancelled(@NonNull DatabaseError databaseError) { }
+                     });
+                 }
+             }
              @Override
              public void onNothingSelected(AdapterView<?> parent) {}
          });
-
      }
-
  }

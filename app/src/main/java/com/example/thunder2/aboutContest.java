@@ -21,11 +21,21 @@ import java.util.List;
 
 import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
+/*리그오브 레전드 0
+   배틀그라운드 1
+   포트나이트 2
+   오버워치 3
+   스타크래프트 4
+   기타 5
+  */
+
 public class aboutContest extends AppCompatActivity
         implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     Context mContext;
+
+    private int event;
 
     private String locationName;//주소 스트링 값
     private double mlat;//위도 전달
@@ -44,7 +54,7 @@ public class aboutContest extends AppCompatActivity
         String getDate=getIntent().getStringExtra("stringDate");
         String getDeadline=getIntent().getStringExtra("stringDeadline");
         String getETC=getIntent().getStringExtra("stringETC");
-        String getEvent=getIntent().getStringExtra("stringEvent");
+        int getEvent=getIntent().getIntExtra("intEvent", 1);
         String getHost=getIntent().getStringExtra("stringHost");
         pcRooomName=getHost;
         String getLocation=getIntent().getStringExtra("stringLocation");
@@ -63,8 +73,31 @@ public class aboutContest extends AppCompatActivity
         date.setText(getDate);
         TextView deadline=(TextView)findViewById(R.id.contest_deadline);
         deadline.setText(getDeadline);
+
+
         TextView event=(TextView)findViewById(R.id.contest_event);
-        event.setText(getEvent);
+        if(getEvent==0){
+            String game="리그오브레전드";
+            event.setText(game);
+        }else if(getEvent==1){
+            String game="배틀그라운드";
+            event.setText(game);
+        }else if(getEvent==2){
+            String game="포트나이트";
+            event.setText(game);
+        }else if(getEvent==3){
+            String game="오버워치";
+            event.setText(game);
+        }else if(getEvent==4){
+            String game="스타크래프트";
+            event.setText(game);
+        }else if(getEvent==5){
+            String game="기타";
+            event.setText(game);
+        }
+
+
+
         TextView how=(TextView)findViewById(R.id.contest_how);
         how.setText(getHow);
         TextView prize=(TextView)findViewById(R.id.contest_prize);

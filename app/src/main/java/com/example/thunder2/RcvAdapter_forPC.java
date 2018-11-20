@@ -21,9 +21,6 @@ import java.util.ArrayList;
 public class RcvAdapter_forPC extends RecyclerView.Adapter<RcvAdapter_forPC.ViewHolder> {
     private Context mContext;
     private ArrayList<DTOaboutPC> dataList;
-    private DatabaseReference mDatabase;
-    static final String TAG = "FUCKYOUANDROID";
-    //private ArrayList<DataForm_forPC> dataList;
 
     public RcvAdapter_forPC(Context mContext, ArrayList<DTOaboutPC> dataList) {
         this.mContext = mContext;
@@ -63,9 +60,10 @@ public class RcvAdapter_forPC extends RecyclerView.Adapter<RcvAdapter_forPC.View
                     intent.putExtra("stringSpec", dataList.get(getAdapterPosition()).getSpec());
                     intent.putExtra("stringName", dataList.get(getAdapterPosition()).getName());
                     intent.putExtra("stringNotice", dataList.get(getAdapterPosition()).getNotice());
+                    intent.putExtra("stringUID",dataList.get(getAdapterPosition()).getUID());
+                    //intent.putExtra("stringSeatUnuse", dataList.get(getAdapterPosition()).getSeatUnuse());
 
-                    Log.d(TAG, "onClick: "+dataList.get(getAdapterPosition()).getSeatKind());
-                    Log.d(TAG, "onClick: "+dataList.get(getAdapterPosition()).getSeat_total());
+
                     mContext.startActivity(intent);
                 }
             });

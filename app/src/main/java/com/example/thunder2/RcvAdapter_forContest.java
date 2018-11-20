@@ -16,8 +16,6 @@ public class RcvAdapter_forContest extends RecyclerView.Adapter<RcvAdapter_forCo
     private Context mContext;
     private ArrayList<DTOaboutContest> dataList;
 
-    public final static String TAG="dddd";
-
 
     public RcvAdapter_forContest(Context mContext, ArrayList<DTOaboutContest> dataList) {
         this.mContext = mContext;
@@ -52,7 +50,7 @@ public class RcvAdapter_forContest extends RecyclerView.Adapter<RcvAdapter_forCo
                     intent.putExtra("stringDate",dataList.get(getAdapterPosition()).getDate());
                     intent.putExtra("stringDeadline", dataList.get(getAdapterPosition()).getDeadline());
                     intent.putExtra("stringETC", dataList.get(getAdapterPosition()).getETC());
-                    intent.putExtra("stringEvent", dataList.get(getAdapterPosition()).getEvent());
+                    intent.putExtra("intEvent", dataList.get(getAdapterPosition()).getEvent());
                     intent.putExtra("stringHost", dataList.get(getAdapterPosition()).getHost());
                     intent.putExtra("stringHow", dataList.get(getAdapterPosition()).getHow());
                     intent.putExtra("stringLocation", dataList.get(getAdapterPosition()).getLocation());

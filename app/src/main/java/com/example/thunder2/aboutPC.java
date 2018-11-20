@@ -7,6 +7,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +25,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +37,11 @@ import java.util.List;
 
 public class aboutPC extends FragmentActivity
     implements OnMapReadyCallback{
+
+    //파이어베이스 시작
+    private DatabaseReference mDatabase;
+    private ArrayList<Integer> seatList=new ArrayList<>();
+    //파이어베이스 끝
 
     //이미지에 관한 리사이클러뷰 시작
     RecyclerView rcv;
@@ -42,6 +54,8 @@ public class aboutPC extends FragmentActivity
     private double mlat;//위도 전달
     private double mlng;//경도 전달
     private String pcRooomName;//PC방 이름 전달
+    private String strUid;//uid 스트링
+    int unuse;
     Context mContext;
 
     @Override
@@ -49,18 +63,47 @@ public class aboutPC extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_pclist_aboutpc);
 
+
+
         mContext = this;
 
         //전달된 데이터 받기 시작
         String getLocation=getIntent().getStringExtra("stringLocation");
         locationName=getLocation;
         String getSeakind=getIntent().getStringExtra("stringSeatkind");
-        int getSeatTotal=getIntent().getIntExtra("intSeatTotal", 1);
+        final int getSeatTotal=getIntent().getIntExtra("intSeatTotal", 1);
         String getSpec=getIntent().getStringExtra("stringSpec");
         String getName=getIntent().getStringExtra("stringName");
         pcRooomName=getName;
         String getNotice =getIntent().getStringExtra("stringNotice");
-        //전달된 데이터 받기 끝
+        String getUid=getIntent().getStringExtra("stringUID");
+        strUid=getUid;
+        //전달된 데이터 받기
+
+
+        mDatabase= FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("PCL")
+                .child(strUid).child("SeatUnuse");
+
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                unuse=dataSnapshot.getValue(int.class);
+
+                if(unuse > getSeatTotal){
+                    Toast.makeText(getApplicationContext(), "남은자리가 잘못되었습니다.", Toast.LENGTH_SHORT).show();
+                }else {
+                    TextView seatUnuse = (TextView) findViewById(R.id.pc_seatUnuse);
+                    seatUnuse.setText(unuse + "");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
 
         //데이터 XML에 넣기 시작
         TextView name=(TextView)findViewById(R.id.pc_name);
