@@ -1,6 +1,7 @@
 package com.example.thunder2;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     //파이어베이스 시작
     private DatabaseReference mDatabase;
@@ -50,26 +51,24 @@ public class MainActivity extends AppCompatActivity {
     //거리제한(600m)
     private double limitDistance=600;
     private double distance;
-    double mlatitude;//내 위도
-    double mlongitude;//내 경도
+    double mlatitude;
+    double mlongitude;
     double pcLat; //pc방 위도
     double pcLng; //pc방 경도
     //거리제한(600m)
 
-
+    private BackPressCloseHandler backPressCloseHandler;
     Context mContext=this;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
 
-        startLocationService();
-
+        getGPS();
 
 
 
@@ -78,67 +77,13 @@ public class MainActivity extends AppCompatActivity {
                 .getReference()
                 .child("PCL");
 
-
-        //인터넷, GPS 연결 확인 부분 시작
-        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo mobile = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        NetworkInfo wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-
-        final LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-        if(!locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))){
-            Toast.makeText(this,"GPS 연결 안됨",Toast.LENGTH_LONG).show();
-            Toast.makeText(this,"GPS를 확인해주세요",Toast.LENGTH_LONG).show();
-            AlertDialog.Builder gpsDialog = new AlertDialog.Builder(this);
-            gpsDialog.setTitle("GPS 설정");
-            gpsDialog.setMessage("GPS 기능을 설정하시겠습니까?");
-            gpsDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // GPS설정 화면으로 이동
-                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    intent.addCategory(Intent.CATEGORY_DEFAULT);
-                    startActivity(intent);
-                }
-            })
-                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            return;
-                        }
-                    }).create().show();
-        }
-        else{
-            Toast.makeText(this,"GPS 체크 완료",Toast.LENGTH_LONG).show();
-        }
-
-        // wifi 또는 모바일 네트워크 어느 하나라도 연결이 되어있다면,
-        if (wifi.isConnected() || mobile.isConnected()) {
-            Log.i("연결됨" , "연결이 되었습니다.");
-            Toast.makeText(this,"인터넷 체크 완료",Toast.LENGTH_LONG).show();
-        } else {
-            Log.i("연결 안 됨" , "연결이 다시 한번 확인해주세요");
-            Toast.makeText(this,"인터넷을 확인해주세요",Toast.LENGTH_LONG).show();
-            AlertDialog.Builder intDialog = new AlertDialog.Builder(this);
-            intDialog.setTitle("인터넷 설정");
-            intDialog.setMessage("인터넷 기능을 설정하시겠습니까?");
-            intDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // GPS설정 화면으로 이동
-                    Intent intent = new Intent(Settings.ACTION_WIFI_IP_SETTINGS);
-                    intent.addCategory(Intent.CATEGORY_DEFAULT);
-                    startActivity(intent);
-                }
-            })
-                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            return;
-                        }
-                    }).create().show();
-        }
-        //인터넷, GPS 연결 확인 부분 끝
+        checkGpsInternet();
 
         rcv = (RecyclerView) findViewById(R.id.main_rcv);
         rcv.setLayoutManager(new LinearLayoutManager(this));
         rcvAdapter = new RcvAdapter_forPC(this, pcList);
         rcv.setAdapter(rcvAdapter);
+
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -147,9 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-
                     String location=snapshot.getValue(DTOaboutPC.class).getLocation();
-
                     Geocoder mGeoCoder = new Geocoder(mContext);
                     try{
                         List<Address> mResultLocation=mGeoCoder.getFromLocationName(location,1);
@@ -161,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(mContext, "주소를 변환할 수 없습니다.", Toast.LENGTH_SHORT);
                     }
+
+                    getGPS();
 
                     Location myLocation=new Location("point_of_me");
                     myLocation.setLatitude(mlatitude);
@@ -176,61 +121,58 @@ public class MainActivity extends AppCompatActivity {
                         pcList.add(snapshot.getValue(DTOaboutPC.class));
                     }
                 }
-
                 rcvAdapter.notifyDataSetChanged();
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
+        backPressCloseHandler = new BackPressCloseHandler(this);
     }
 
-    private void startLocationService() {
-        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        GPSListener gpsListener = new GPSListener();
-        long minTime = 10000;
-        float minDistance = 0;
-
-        try {
-            // GPS를 이용한 위치 요청
-            manager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    minTime,
-                    minDistance,
-                    gpsListener);
-
-            // 네트워크를 이용한 위치 요청
-            manager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER,
-                    minTime,
-                    minDistance,
-                    gpsListener);
+    public void getGPS(){
+        GPS gps=new GPS(MainActivity.this);
+        mlatitude=gps.getLatitude();
+        mlongitude=gps.getLongitude();
+    }
 
 
-            Location lastLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (lastLocation != null) {
-                mlatitude = lastLocation.getLatitude();
-                mlongitude = lastLocation.getLongitude();
-            }
-        } catch(SecurityException ex) {
-            ex.printStackTrace();
+    public void checkGpsInternet(){
+        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mobile = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        NetworkInfo wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        final LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+        if(!locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))){
+            AlertDialog.Builder gpsDialog = new AlertDialog.Builder(this);
+            gpsDialog.setTitle("GPS 연결 문제");
+            gpsDialog.setMessage("GPS 연결 후 사용해주세요. GPS를 연결하지 않고 사용할 경우 서비스에 제한이 있습니다. " +
+                    "GPS를 접속하여도 목록이 나오지 않을 경우 앱을 켰다 껐다를 반복해주세요");
+            gpsDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+
+                }
+            }).create().show();
         }
 
-    }
+        // wifi 또는 모바일 네트워크 어느 하나라도 연결이 되어있다면,
+        if (wifi.isConnected() || mobile.isConnected()) {
 
-
-    private class GPSListener implements LocationListener {
-        public void onLocationChanged(Location location) {
-            mlatitude = location.getLatitude();
-            mlongitude = location.getLongitude();
+        }else{
+            AlertDialog.Builder intDialog = new AlertDialog.Builder(this);
+            intDialog.setTitle("인터넷 연결 문제");
+            intDialog.setMessage("인터넷 연결 후 사용해주세요. 인터넷을 연결하지 않고 사용할 경우 서비스에 제한이 있습니다.");
+            intDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    System.exit(0);
+                }
+            }).create().show();
         }
-        public void onProviderDisabled(String provider) { }
-        public void onProviderEnabled(String provider) { }
-        public void onStatusChanged(String provider, int status, Bundle extras) { }
     }
 
+    public void onBackPressed(){
+        backPressCloseHandler.onBackPressed();
+    }
 
     public void onButton_contest(View v) {
         Intent intent = new Intent(getApplicationContext(), list_contest.class);

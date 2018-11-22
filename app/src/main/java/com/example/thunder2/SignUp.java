@@ -38,21 +38,25 @@ public class SignUp extends AppCompatActivity {
                 String email = email_join.getText().toString().trim();
                 String pwd = pwd_join.getText().toString().trim();
 
-                firebaseAuth.createUserWithEmailAndPassword(email, pwd)
-                        .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
+                try {
+                    firebaseAuth.createUserWithEmailAndPassword(email, pwd)
+                            .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                if (task.isSuccessful()) {
-                                    Intent intent = new Intent(SignUp.this, SignIn.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(SignUp.this, "등록 에러", Toast.LENGTH_SHORT).show();
-                                    return;
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(SignUp.this, SignIn.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(SignUp.this, "등록 중 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "입력이 완료도지 않았습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -1,6 +1,8 @@
 package com.example.thunder2;
 
+import android.app.AuthenticationRequiredException;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricPrompt;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.io.IOError;
+import java.io.IOException;
 
 public class SignIn extends AppCompatActivity {
 
@@ -76,15 +81,20 @@ public class SignIn extends AppCompatActivity {
 
     // 로그인이 정상적으로 되었는지 확인해준다.
     void signinEvent() {
-        firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()) {
-                            Toast.makeText(SignIn.this, "SignIn Failed", Toast.LENGTH_SHORT).show();
+        try {
+            firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (!task.isSuccessful()) {
+                                Toast.makeText(SignIn.this, "정보가 잘못되었습니다", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+
+        }catch(Exception e){
+            Toast.makeText(getApplicationContext(), "입력이 완료도지 않았습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
