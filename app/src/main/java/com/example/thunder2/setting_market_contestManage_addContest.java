@@ -5,34 +5,77 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.UUID;
+
+
+/*리그오브 레전드 0
+   배틀그라운드 1
+   포트나이트 2
+   오버워치 3
+   스타크래프트 4
+   기타 5
+  */
+
 
 public class setting_market_contestManage_addContest extends AppCompatActivity{
 
     private static int PICK_IMAGE_REQUEST=1;
     ImageView imgView;
+    private String UID;
+    private int event;
+    private String key;
+
+    DatabaseReference mDatabase;
+    DTOaboutContest aboutContest=new DTOaboutContest();
 
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_setting_market_contestmanage_addcontest);
+        UID=getIntent().getStringExtra("UID");
 
         Spinner s = (Spinner)findViewById(R.id.spinner);
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
-
-
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                aboutContest.setEvent(position);
+            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+
+
+        DatabaseReference mDatabase2=FirebaseDatabase.getInstance().getReference().child("PCL");
+        mDatabase2.child(UID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                EditText pcLocation=(EditText)findViewById(R.id.contest_place);
+                pcLocation.setText(dataSnapshot.getValue(DTOaboutPC.class).getLocation());
+
+                EditText pcName=(EditText)findViewById(R.id.contest_pcName);
+                pcName.setText(dataSnapshot.getValue(DTOaboutContest.class).getName());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+
     }
 
     public void add_contest_image(View view){
@@ -67,5 +110,67 @@ public class setting_market_contestManage_addContest extends AppCompatActivity{
 
     }
 
+    public void onButton_add(View view){
 
+        for(int i=0; i<10;i++){
+            key= UUID.randomUUID().toString();
+        }
+
+        mDatabase= FirebaseDatabase
+                .getInstance()
+                .getReference();
+
+        EditText contestName = (EditText) findViewById(R.id.contest_name);
+        String Name = contestName.getText().toString();
+        aboutContest.setName(Name);
+
+        EditText contestpcName = (EditText) findViewById(R.id.contest_pcName);
+        String  pcName= contestpcName.getText().toString();
+        aboutContest.setHost(pcName);
+
+        EditText contestPlace = (EditText) findViewById(R.id.contest_place);
+        String pcPlace = contestPlace.getText().toString();
+        aboutContest.setLocation(pcPlace);
+
+        EditText contestDate = (EditText) findViewById(R.id.contest_date);
+        String Date = contestDate.getText().toString();
+        aboutContest.setDate(Date);
+
+        EditText contestDeadline = (EditText) findViewById(R.id.contest_deadline);
+        String Deadline = contestDeadline.getText().toString();
+        aboutContest.setDeadline(Deadline);
+
+//        EditText contestEvent = (EditText) findViewById(R.id.contest_name);
+//        String Name = contestName.getText().toString();
+
+        EditText contestPrize = (EditText) findViewById(R.id.contest_prize);
+        String Prize = contestPrize.getText().toString();
+        aboutContest.setPrize(Prize);
+
+        EditText contestQual = (EditText) findViewById(R.id.contest_qual);
+        String Qual = contestQual.getText().toString();
+        aboutContest.setQuali(Qual);
+
+        EditText contestHow = (EditText) findViewById(R.id.contest_how);
+        String How = contestHow.getText().toString();
+        aboutContest.setHow(How);
+
+        EditText contestEtc = (EditText) findViewById(R.id.contest_etc);
+        String Etc = contestEtc.getText().toString();
+        aboutContest.setETC(Etc);
+
+        aboutContest.setUid(UID);
+        aboutContest.setkey(key);
+
+
+
+        mDatabase.child("Contest").child(key).setValue(aboutContest);
+        Toast.makeText(getApplicationContext(), "대회가 추가되었습니다.", Toast.LENGTH_SHORT).show();
+        finish();
+
+
+
+
+
+    }
 }

@@ -68,7 +68,9 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
 
-        getGPS();
+        //getGPS();
+        mlatitude=37.233868981629044;
+        mlongitude=127.1857721894659;
 
 
 
@@ -105,7 +107,6 @@ public class MainActivity extends AppCompatActivity{
                         Toast.makeText(mContext, "주소를 변환할 수 없습니다.", Toast.LENGTH_SHORT);
                     }
 
-                    getGPS();
 
                     Location myLocation=new Location("point_of_me");
                     myLocation.setLatitude(mlatitude);
@@ -129,11 +130,6 @@ public class MainActivity extends AppCompatActivity{
         backPressCloseHandler = new BackPressCloseHandler(this);
     }
 
-    public void getGPS(){
-        GPS gps=new GPS(MainActivity.this);
-        mlatitude=gps.getLatitude();
-        mlongitude=gps.getLongitude();
-    }
 
 
     public void checkGpsInternet(){

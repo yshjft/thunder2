@@ -47,6 +47,16 @@
             android:layout_height="50dp"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 주최"/>
+        <EditText
+            android:id="@+id/contest_pcName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+
 
 
         <TextView
@@ -116,6 +126,17 @@
             />
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 참가 방법"/>
+        <EditText
+            android:id="@+id/contest_how"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            />
+
+
 
         <TextView
             android:layout_width="match_parent"
@@ -132,6 +153,7 @@
             android:layout_width="384dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
+            android:onClick="onButton_add"
             android:text="추가"
             android:textSize="10sp" />
 

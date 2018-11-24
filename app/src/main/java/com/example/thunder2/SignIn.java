@@ -1,11 +1,10 @@
 package com.example.thunder2;
 
-import android.app.AuthenticationRequiredException;
 import android.content.Intent;
-import android.hardware.biometrics.BiometricPrompt;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +15,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.io.IOError;
-import java.io.IOException;
 
 public class SignIn extends AppCompatActivity {
 
@@ -37,10 +33,6 @@ public class SignIn extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signOut();
 
-        /*// status bar 색상을 지정한다.
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Integer.parseInt("red"));
-        }*/
 
         email = (EditText)findViewById(R.id.sign_in_email);
         password = (EditText)findViewById(R.id.sign_in_pwd);
@@ -64,48 +56,38 @@ public class SignIn extends AppCompatActivity {
         });
 
         // 로그인 인터페이스 리스너, 로그인되었거나 로그아웃 되었는지 따른 상태가 변하면 인터페이서 리스너가 실행된다.
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                // 로그인 했을 때
-                if(user != null) {
-                    Intent intent = new Intent(SignIn.this, setting_market.class);
-                    startActivity(intent);
-                    finish();
-                }
-                else {}
-            }
-        };
+
     }
 
     // 로그인이 정상적으로 되었는지 확인해준다.
     void signinEvent() {
-        try {
+       try {
             firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
-                                Toast.makeText(SignIn.this, "정보가 잘못되었습니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignIn.this, "SignIn Failed", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Intent intent = new Intent(SignIn.this, setting_market.class);
+                                intent.putExtra("stringUID", firebaseAuth.getCurrentUser().getUid());
+                                startActivity(intent);
+                                finish();
                             }
                         }
                     });
-
         }catch(Exception e){
-            Toast.makeText(getApplicationContext(), "입력이 완료도지 않았습니다.", Toast.LENGTH_SHORT).show();
+
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseAuth.addAuthStateListener(authStateListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        firebaseAuth.addAuthStateListener(authStateListener);
     }
 }

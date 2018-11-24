@@ -57,6 +57,7 @@ public class RcvAdapter_forContest extends RecyclerView.Adapter<RcvAdapter_forCo
                     intent.putExtra("stringName", dataList.get(getAdapterPosition()).getName());
                     intent.putExtra("stringPrize", dataList.get(getAdapterPosition()).getPrize());
                     intent.putExtra("stringQualification", dataList.get(getAdapterPosition()).getQuali());
+
                     mContext.startActivity(intent);
                 }
             });

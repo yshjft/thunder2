@@ -103,6 +103,7 @@
             android:layout_height="25dp"
             android:text="PC방 이름 입력"/>
         <EditText
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             />
@@ -113,6 +114,7 @@
             android:layout_height="25dp"
             android:text="PC방 주소 입력"/>
         <EditText
+            android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             />
@@ -123,6 +125,7 @@
             android:layout_height="25dp"
             android:text="PC방 총자리 입력"/>
         <EditText
+            android:id="@+id/totalSeat"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             />
@@ -132,6 +135,7 @@
             android:layout_height="25dp"
             android:text="PC방 특정 게임 전용 좌석 입력"/>
         <EditText
+            android:id="@+id/seatKind"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             />
@@ -141,6 +145,7 @@
             android:layout_height="25dp"
             android:text="PC방 컴퓨터 사양 입력"/>
         <EditText
+            android:id="@+id/spec"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             />
@@ -151,16 +156,18 @@
             android:layout_height="25dp"
             android:text="PC방 공지사항 입력"/>
         <EditText
+            android:id="@+id/notice"
             android:layout_width="match_parent"
             android:layout_height="125dp"
             />
 
 
         <Button
-            android:id="@+id/comfirm_button"
+            android:id="@+id/confirm_button"
             android:layout_width="384dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
+            android:onClick="onButton_confirm"
             android:text="확인"
             android:textSize="10sp" />
 

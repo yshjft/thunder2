@@ -1,115 +1,125 @@
 package com.example.thunder2;
 
 public class DTOaboutContest {
-    private String Date;
-    private String Deadline;
-    private String ETC;
-    private int Event;
-    private String Host;
+    private String date;
+    private String deadline;
+    private String etc;
+    private int event;
+    private String host;
+    private String how;
+    private String location;
+    private String name;
+    private String prize;
+    private String quali;
+    private String uid;
+    private String key;
 
-
-
-    private String How;
-    private String Location;
-    private String Name;
-    private String Prize;
-    private String Quali; //나이를 숫자로 입력하도록 설정
     public DTOaboutContest() { }
-    public DTOaboutContest(String date, String deadline, String ETC, int event, String host, String how, String location, String name, String prize, String quali) {
-        Date = date;
-        Deadline = deadline;
-        this.ETC = ETC;
-        Event = event;
-        Host = host;
-        How = how;
-        Location = location;
-        Name = name;
-        Prize = prize;
-        Quali = quali;
+    public DTOaboutContest(String date, String deadline, String ETC, int event, String host, String how, String location, String name, String prize, String quali, String uid, String key) {
+        this.date = date;
+        this.deadline = deadline;
+        etc = ETC;
+        event = event;
+        this.host = host;
+        how = how;
+        this.location = location;
+        this.name = name;
+        this.prize = prize;
+        this.quali = quali;
+        this.uid=uid;
+        this.key=key;
     }
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(String date) {
-        Date = date;
+        this.date = date;
     }
 
     public String getDeadline() {
-        return Deadline;
+        return deadline;
     }
 
     public void setDeadline(String deadline) {
-        Deadline = deadline;
+        this.deadline = deadline;
     }
 
     public String getETC() {
-        return ETC;
+        return etc;
     }
 
     public void setETC(String ETC) {
-        this.ETC = ETC;
+        etc = ETC;
     }
 
     public int getEvent() {
-        return Event;
+        return event;
     }
 
     public void setEvent(int event) {
-        Event = event;
+        this.event = event;
     }
 
     public String getHost() {
-        return Host;
+        return host;
     }
 
     public void setHost(String host) {
-        Host = host;
+        this.host = host;
     }
 
     public String getHow() {
-        return How;
+        return how;
     }
 
     public void setHow(String how) {
-        How = how;
+        this.how = how;
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
     public void setLocation(String location) {
-        Location = location;
+        this.location = location;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getPrize() {
-        return Prize;
+        return prize;
     }
 
     public void setPrize(String prize) {
-        Prize = prize;
+        this.prize = prize;
     }
 
     public String getQuali() {
-        return Quali;
+        return quali;
     }
 
     public void setQuali(String quali) {
-        Quali = quali;
+        this.quali = quali;
     }
 
+    public String getUid() {
+        return uid;
+    }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
+    public String getkey(){return key;}
 
+    public void setkey(String key){this.key=key;}
 }
 
 

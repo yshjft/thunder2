@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 public class RcvAdapter_correctionContest extends RecyclerView.Adapter<RcvAdapter_correctionContest.ViewHolder>{
     private Context mContext;
-    private ArrayList<DataForm_correctionContest> dataList;
+    private ArrayList<DTOaboutContest> dataList;
 
 
-    public RcvAdapter_correctionContest(Context mContext, ArrayList<DataForm_correctionContest> dataList) {
+    public RcvAdapter_correctionContest(Context mContext, ArrayList<DTOaboutContest> dataList) {
         this.mContext = mContext;
         this.dataList = dataList;
     }
@@ -46,6 +46,18 @@ public class RcvAdapter_correctionContest extends RecyclerView.Adapter<RcvAdapte
                 @Override
                 public void onClick(View view) {
                     Intent intent= new Intent(mContext, setting_market_contestManage_correction.class);
+                    intent.putExtra("stringName",dataList.get(getAdapterPosition()).getName());
+                    intent.putExtra("stringHost", dataList.get(getAdapterPosition()).getHost());
+                    intent.putExtra("stringLocation", dataList.get(getAdapterPosition()).getLocation());
+                    intent.putExtra("stringDate", dataList.get(getAdapterPosition()).getDate());
+                    intent.putExtra("stringDeadline", dataList.get(getAdapterPosition()).getDeadline());
+                    intent.putExtra("intEvent", dataList.get(getAdapterPosition()).getEvent());
+                    intent.putExtra("stringPrize", dataList.get(getAdapterPosition()).getPrize());
+                    intent.putExtra("stringQuali", dataList.get(getAdapterPosition()).getQuali());
+                    intent.putExtra("stringHow", dataList.get(getAdapterPosition()).getHow());
+                    intent.putExtra("stringEtc", dataList.get(getAdapterPosition()).getETC());
+                    intent.putExtra("stringUID", dataList.get(getAdapterPosition()).getUid());
+                    intent.putExtra("stringKey", dataList.get(getAdapterPosition()).getkey());
                     mContext.startActivity(intent);
                 }
             });

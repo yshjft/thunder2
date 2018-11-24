@@ -1,58 +1,58 @@
 package com.example.thunder2;
 
 public class DTOaboutPC {
-    private String Location;
-    private String SeatKind;
-    private int Seat_total;
-    private String Spec;
+    private String location;
+    private String seatKind;
+    private int seat_total;
+    private String spec;
     private String name;
     private String notice;
-    private String UID;
-    private int SeatUnuse;
+    private String uid;
+    private int seatUnuse;
 
     public DTOaboutPC() {
     }
 
     public DTOaboutPC(String location, String seatKind, int seat_total, String spec, String name, String notice, String UID) {
-        Location = location;
-        SeatKind = seatKind;
-        Seat_total = seat_total;
-        Spec = spec;
+        this.location = location;
+        this.seatKind = seatKind;
+        this.seat_total = seat_total;
+        this.spec = spec;
         this.name = name;
         this.notice = notice;
-        this.UID=UID;
+        this.uid=UID;
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
     public void setLocation(String location) {
-        Location = location;
+        this.location = location;
     }
 
     public String getSeatKind() {
-        return SeatKind;
+        return seatKind;
     }
 
     public void setSeatKind(String seatKind) {
-        SeatKind = seatKind;
+        this.seatKind = seatKind;
     }
 
     public int getSeat_total() {
-        return Seat_total;
+        return seat_total;
     }
 
     public void setSeat_total(int seat_total) {
-        Seat_total = seat_total;
+        this.seat_total = seat_total;
     }
 
     public String getSpec() {
-        return Spec;
+        return spec;
     }
 
     public void setSpec(String spec) {
-        Spec = spec;
+        this.spec = spec;
     }
 
     public String getName() {
@@ -71,12 +71,12 @@ public class DTOaboutPC {
         this.notice = notice;
     }
 
-    public String getUID(){return UID;}
+    public String getUID(){return uid;}
 
-    public void setUID(String UID){this.UID=UID;}
+    public void setUID(String UID){this.uid=UID;}
 
-    public int getSeatUnuse(){return SeatUnuse;}
+    public int getSeatUnuse(){return seatUnuse;}
 
-    public void setSeatUnuse(int SeatUnuse){this.SeatUnuse=SeatUnuse;}
+    public void setSeatUnuse(int SeatUnuse){this.seatUnuse=SeatUnuse;}
 
 }

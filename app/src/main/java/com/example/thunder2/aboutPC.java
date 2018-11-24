@@ -85,7 +85,7 @@ public class aboutPC extends FragmentActivity
                 .getInstance()
                 .getReference()
                 .child("PCL")
-                .child(strUid).child("SeatUnuse");
+                .child(strUid).child("seatUnuse");
 
 
         mDatabase.addValueEventListener(new ValueEventListener() {

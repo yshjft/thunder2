@@ -47,6 +47,16 @@
             android:layout_height="50dp"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 주최"/>
+        <EditText
+            android:id="@+id/contest_host"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+
 
 
         <TextView
@@ -83,8 +93,19 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="수정 전 종목"/>
+        <TextView
+            android:id="@+id/contest_event"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:text="대회 종목 수정"/>
+            android:text="수정 후 종목(종목이 변경되지 않도록 주의하세요)"/>
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
@@ -115,6 +136,16 @@
             android:layout_height="100dp"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="대회 참가 방법 수정"/>
+        <EditText
+            android:id="@+id/contest_how"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            />
+
 
 
         <TextView
@@ -126,11 +157,13 @@
             android:layout_width="match_parent"
             android:layout_height="125dp"
             />
+
         <Button
             android:id="@+id/correction_button"
             android:layout_width="384dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
+            android:onClick="onButton_correction"
             android:text="수정"
             android:textSize="10sp" />
 
