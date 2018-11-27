@@ -1,5 +1,7 @@
 package com.example.thunder2;
 
+import android.widget.ImageView;
+
 public class DTOaboutPC {
     private String location;
     private String seatKind;
@@ -9,6 +11,8 @@ public class DTOaboutPC {
     private String notice;
     private String uid;
     private int seatUnuse;
+    
+
 
     public DTOaboutPC() {
     }
