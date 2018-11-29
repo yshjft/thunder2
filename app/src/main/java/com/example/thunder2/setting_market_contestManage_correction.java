@@ -1,10 +1,13 @@
 package com.example.thunder2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,8 +17,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class setting_market_contestManage_correction extends AppCompatActivity{
 
@@ -23,15 +33,24 @@ public class setting_market_contestManage_correction extends AppCompatActivity{
     ImageView imgView;
     private String UID;
     private String key;
+    private String downloadurl;
+    private Uri uri;
 
     DatabaseReference mDatabase;
     DTOaboutContest aboutContest=new DTOaboutContest();
+    Context context=this;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_setting_market_contestmanage_correction);
+
+        ImageView target = (ImageView) findViewById(R.id.contest2);
+        downloadurl=getIntent().getStringExtra("stringImage");
+        Glide.with(context)
+                .load(downloadurl)
+                .into(target);
 
 
         EditText Name=(EditText)findViewById(R.id.contest_name);
@@ -112,7 +131,7 @@ public class setting_market_contestManage_correction extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && null != data) {
-                Uri uri = data.getData();
+                uri = data.getData();
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                 int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
@@ -178,16 +197,55 @@ public class setting_market_contestManage_correction extends AppCompatActivity{
         aboutContest.setUid(UID);
         aboutContest.setkey(key);
 
+        uploadFile(uri);
 
 
-        mDatabase.child("Contest").child(key).setValue(aboutContest);
-        Toast.makeText(getApplicationContext(), "대회가 수정되었습니다.", Toast.LENGTH_SHORT).show();
-        finish();
+        if(Name.equals("")){
+            Toast.makeText(getApplicationContext(), "대회 이름 수정에 오류가 있습니다.", Toast.LENGTH_SHORT).show();
+        }else if(Date.equals("")) {
+            Toast.makeText(getApplicationContext(), "대회 날짜 수정에 오류가 있습니다.", Toast.LENGTH_SHORT).show();
+        }else if(Deadline.equals("")){
+            Toast.makeText(getApplicationContext(), "대회 신청기한 수정에 오류가 있습니다.", Toast.LENGTH_SHORT).show();
+        }else{
+            new Handler().postDelayed(new Runnable()
+            {
+                public void run(){
+                    mDatabase.child("Contest").child(key).setValue(aboutContest);
+                    Toast.makeText(getApplicationContext(), "대회가 수정되었습니다. 변경 사항에 이상이 없는지 확인해주세요.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            },6000);
+        }
+    }
 
+    private void uploadFile(Uri uri) {
+        if(uri!=null) {
+            FirebaseStorage storage = FirebaseStorage.getInstance();
 
+            StorageReference storageRef = storage.getReference();
+            final StorageReference riversRef = storageRef.child("contest").child(key);
+            final UploadTask uploadTask= riversRef.putFile(uri);
 
-
-
+            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return riversRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        aboutContest.setImage(downloadUri.toString());
+                    } else { }
+                }
+            });
+        }else{
+            aboutContest.setImage(downloadurl);
+        }
     }
 
 }
