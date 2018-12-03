@@ -141,8 +141,7 @@ public class MainActivity extends AppCompatActivity{
         if(!locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))){
             AlertDialog.Builder gpsDialog = new AlertDialog.Builder(this);
             gpsDialog.setTitle("GPS 연결 문제");
-            gpsDialog.setMessage("GPS 연결 후 사용해주세요. GPS를 연결하지 않고 사용할 경우 서비스에 제한이 있습니다. " +
-                    "GPS를 접속하여도 목록이 나오지 않을 경우 앱을 켰다 껐다를 반복해주세요");
+            gpsDialog.setMessage("GPS 연결 후 사용해주세요. GPS를 연결하지 않고 사용할 경우 서비스에 제한이 있습니다. ");
             gpsDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     finish();
