@@ -21,7 +21,9 @@
             android:id="@+id/sign_in_email"
             android:hint="이메일"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:lines="1"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -36,7 +38,9 @@
             android:hint="비밀번호"
             android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:lines="1"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button

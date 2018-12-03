@@ -10,32 +10,36 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/second_rcv"
+
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            tools:layout_editor_absoluteX="125dp"
-            tools:layout_editor_absoluteY="16dp" />
+            android:layout_height="248dp"
+            android:src="@drawable/pc1" />
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="PC방 이름 : " />
+            android:text="PC방 이름" />
         <TextView
+            android:textStyle="bold"
+            android:textSize="30sp"
             android:id="@+id/pc_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-             />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="PC방 주소 : " />
+            android:text="PC방 주소" />
         <TextView
             android:id="@+id/pc_address"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            />
+            android:textSize="15sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 
@@ -44,31 +48,38 @@
             android:layout_height="25dp"
             android:text="총자리"/>
         <TextView
+            android:textColor="#3631f7"
+            android:textStyle="bold"
+            android:textSize="40sp"
             android:id="@+id/pc_seatTotal"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:text="남은 자리"/>
         <TextView
+            android:textColor="#fd4231"
+            android:textStyle="bold"
+            android:textSize="40sp"
             android:id="@+id/pc_seatUnuse"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="특정 게임 전용 좌석 : " />
+            android:text="특정 게임 전용 좌석" />
         <TextView
             android:id="@+id/pc_seatKind"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 
@@ -76,31 +87,31 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="PC방 컴퓨터 사양 : "/>
+            android:text="PC방 컴퓨터 사양"/>
         <TextView
             android:id="@+id/pc_spec"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            />
+            android:layout_height="120dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="PC방 공지사항 : " />
+            android:text="PC방 공지사항" />
         <TextView
             android:id="@+id/pc_notice"
             android:layout_width="match_parent"
             android:layout_height="125dp"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:text="지도 : " />
+            android:text="지도" />
         <fragment
             android:layout_width="match_parent"
             android:layout_height="300dp"

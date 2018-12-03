@@ -6,9 +6,11 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -63,6 +65,13 @@ public class aboutContest extends AppCompatActivity
         String getPrize=getIntent().getStringExtra("stringPrize");
         String getQualification=getIntent().getStringExtra("stringQualification");
         String getHow=getIntent().getStringExtra("stringHow");
+
+        String getImage=getIntent().getStringExtra("stringImage");
+
+        ImageView target = (ImageView) findViewById(R.id.contest_image);
+        Glide.with(mContext)
+                .load(getImage)
+                .into(target);
 
 
         TextView name=(TextView)findViewById(R.id.contest_name);

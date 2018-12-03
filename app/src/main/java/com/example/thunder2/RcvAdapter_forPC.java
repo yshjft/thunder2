@@ -3,6 +3,7 @@ package com.example.thunder2;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,12 +43,16 @@ public class RcvAdapter_forPC extends RecyclerView.Adapter<RcvAdapter_forPC.View
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName;
+        TextView location;
+        CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
 
             tvName = (TextView) itemView.findViewById(R.id.item_tv_name);
+            location=(TextView)itemView.findViewById(R.id.location);
+            cardview=(CardView) itemView.findViewById(R.id.cardview);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -61,38 +66,17 @@ public class RcvAdapter_forPC extends RecyclerView.Adapter<RcvAdapter_forPC.View
                     intent.putExtra("stringName", dataList.get(getAdapterPosition()).getName());
                     intent.putExtra("stringNotice", dataList.get(getAdapterPosition()).getNotice());
                     intent.putExtra("stringUID",dataList.get(getAdapterPosition()).getUID());
-                    //intent.putExtra("stringSeatUnuse", dataList.get(getAdapterPosition()).getSeatUnuse());
-
-
+                    intent.putExtra("stringImage",dataList.get(getAdapterPosition()).getImage());
                     mContext.startActivity(intent);
                 }
             });
-
-
-
-
-
-//
-//            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View view) {
-//                    Toast.makeText(mContext, "remove " + dataList.get(getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
-//                    removeItem(getAdapterPosition());
-//                    return false;
-//                }
-//            });
         }
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvName.setText(dataList.get(position).getName());
+        holder.location.setText(dataList.get(position).getLocation());
     }
-
-//    private void removeItem(int position) {
-//        dataList.remove(position);
-//        notifyItemRemoved(position);
-//        notifyItemRangeChanged(position, dataList.size());
-//    }
 }
 

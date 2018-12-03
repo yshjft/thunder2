@@ -45,8 +45,7 @@ public class SignUp extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                                     if (task.isSuccessful()) {
-                                        Intent intent = new Intent(SignUp.this, SignIn.class);
-                                        startActivity(intent);
+                                        Toast.makeText(SignUp.this, "회원가입 완료", Toast.LENGTH_SHORT).show();
                                         finish();
                                     } else {
                                         Toast.makeText(SignUp.this, "등록 중 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();

@@ -13,9 +13,10 @@ public class DTOaboutContest {
     private String quali;
     private String uid;
     private String key;
+    private String image;
 
     public DTOaboutContest() { }
-    public DTOaboutContest(String date, String deadline, String ETC, int event, String host, String how, String location, String name, String prize, String quali, String uid, String key) {
+    public DTOaboutContest(String date, String deadline, String ETC, int event, String host, String how, String location, String name, String prize, String quali, String uid, String key, String image) {
         this.date = date;
         this.deadline = deadline;
         etc = ETC;
@@ -28,6 +29,7 @@ public class DTOaboutContest {
         this.quali = quali;
         this.uid=uid;
         this.key=key;
+        this.image=image;
     }
     public String getDate() {
         return date;
@@ -120,6 +122,14 @@ public class DTOaboutContest {
     public String getkey(){return key;}
 
     public void setkey(String key){this.key=key;}
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
 
 

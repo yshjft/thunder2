@@ -51,21 +51,6 @@
          rcvAdapter = new RcvAdapter_forContest(this, contestList);
          rcv.setAdapter(rcvAdapter);
 
-//         mDatabase.addValueEventListener(new ValueEventListener() {
-//             @Override
-//             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                 contestList.clear();
-//                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                     contestList.add(snapshot.getValue(DTOaboutContest.class));
-//                 }
-//                 rcvAdapter.notifyDataSetChanged();
-//             }
-//
-//             @Override
-//             public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//             }
-//         });
 
 
          Spinner s = (Spinner)findViewById(R.id.spinner);

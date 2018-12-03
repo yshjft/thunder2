@@ -1,12 +1,22 @@
 package com.example.thunder2;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -33,14 +43,20 @@ public class RcvAdapter_correctionContest extends RecyclerView.Adapter<RcvAdapte
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-
-        //ImageView ivIcon;
         TextView tvName;
+        TextView date;
+        TextView deadline;
+        TextView location;
+        CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             tvName = (TextView) itemView.findViewById(R.id.item_contest_name);
+            date = (TextView) itemView.findViewById(R.id.date);
+            deadline = (TextView) itemView.findViewById(R.id.deadline);
+            location= (TextView) itemView.findViewById(R.id.location);
+            cardview=(CardView) itemView.findViewById(R.id.cardview);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,7 +74,31 @@ public class RcvAdapter_correctionContest extends RecyclerView.Adapter<RcvAdapte
                     intent.putExtra("stringEtc", dataList.get(getAdapterPosition()).getETC());
                     intent.putExtra("stringUID", dataList.get(getAdapterPosition()).getUid());
                     intent.putExtra("stringKey", dataList.get(getAdapterPosition()).getkey());
+                    intent.putExtra("stringImage", dataList.get(getAdapterPosition()).getImage());
                     mContext.startActivity(intent);
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+
+                    android.support.v7.app.AlertDialog.Builder intDialog = new android.support.v7.app.AlertDialog.Builder(mContext);
+                    intDialog.setTitle("삭제");
+                    intDialog.setMessage(dataList.get(getAdapterPosition()).getName()+"를 대회에서 삭제합니다.");
+                    intDialog.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            removeItem(getAdapterPosition(), dataList.get(getAdapterPosition()).getkey());
+
+
+                        }
+                    }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    }).create().show();
+
+                    return true;
                 }
             });
         }
@@ -69,12 +109,34 @@ public class RcvAdapter_correctionContest extends RecyclerView.Adapter<RcvAdapte
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.tvName.setText(dataList.get(position).getName());
+        holder.date.setText("일시 : "+dataList.get(position).getDate());
+        holder.deadline.setText("신청기한 : "+dataList.get(position).getDeadline());
+        holder.location.setText("장소 : "+dataList.get(position).getLocation());
     }
 
-//    private void removeItem(int position) {
-//        dataList.remove(position);
-//        notifyItemRemoved(position);
-//        notifyItemRangeChanged(position, dataList.size());
-//    }
+    private void removeItem(int position, String key) {
+        DatabaseReference mDatabase;
+        mDatabase= FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Contest").child(key).setValue(null);
+
+        dataList.remove(position);
+
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, dataList.size());
+
+        FirebaseStorage storage=FirebaseStorage.getInstance();
+        StorageReference storageRef= storage.getReference();
+        StorageReference desertRef= storageRef.child("contest").child(key);
+
+        desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) { }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) { }
+        });
+
+
+    }
 
 }

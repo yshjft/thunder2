@@ -214,7 +214,7 @@ public class setting_market_contestManage_correction extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "대회가 수정되었습니다. 변경 사항에 이상이 없는지 확인해주세요.", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-            },6000);
+            },10000);
         }
     }
 

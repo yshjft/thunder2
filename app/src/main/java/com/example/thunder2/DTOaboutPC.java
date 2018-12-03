@@ -11,13 +11,14 @@ public class DTOaboutPC {
     private String notice;
     private String uid;
     private int seatUnuse;
-    
+    private String image;
+
 
 
     public DTOaboutPC() {
     }
 
-    public DTOaboutPC(String location, String seatKind, int seat_total, String spec, String name, String notice, String UID) {
+    public DTOaboutPC(String location, String seatKind, int seat_total, String spec, String name, String notice, String UID, String image) {
         this.location = location;
         this.seatKind = seatKind;
         this.seat_total = seat_total;
@@ -25,6 +26,7 @@ public class DTOaboutPC {
         this.name = name;
         this.notice = notice;
         this.uid=UID;
+        this.image=image;
     }
 
     public String getLocation() {
@@ -82,5 +84,15 @@ public class DTOaboutPC {
     public int getSeatUnuse(){return seatUnuse;}
 
     public void setSeatUnuse(int SeatUnuse){this.seatUnuse=SeatUnuse;}
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
 
 }

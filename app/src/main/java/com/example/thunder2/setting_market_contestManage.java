@@ -43,11 +43,9 @@ public class setting_market_contestManage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 contestlist.clear();
-                Log.d("jesus", "uid : "+UID);
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     if(UID.equals(snapshot.getValue(DTOaboutContest.class).getUid())==true){
-                        Log.d("jesus", "uid2 : "+snapshot.getValue(DTOaboutContest.class).getUid());
                         contestlist.add(snapshot.getValue(DTOaboutContest.class));
                     }
                 }
@@ -59,18 +57,7 @@ public class setting_market_contestManage extends AppCompatActivity {
 
             }
         });
-
-
-
     }
-
-//    private void init(){
-//
-//        DataForm_correctionContest a=new DataForm_correctionContest("대회1 수정하기");
-//        list.add(a);
-//
-//    }
-
 
     public void onButton_add_contest(View v) {
         Intent intent = new Intent(getApplicationContext(),setting_market_contestManage_addContest.class);

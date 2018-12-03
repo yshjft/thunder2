@@ -2,6 +2,7 @@ package com.example.thunder2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,11 +38,19 @@ public class RcvAdapter_forContest extends RecyclerView.Adapter<RcvAdapter_forCo
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName;
+        TextView date;
+        TextView deadline;
+        TextView location;
+        CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             tvName = (TextView) itemView.findViewById(R.id.item_contestText_view);
+            date = (TextView) itemView.findViewById(R.id.date);
+            deadline = (TextView) itemView.findViewById(R.id.deadline);
+            location= (TextView) itemView.findViewById(R.id.location);
+            cardview=(CardView) itemView.findViewById(R.id.cardview);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -57,7 +66,7 @@ public class RcvAdapter_forContest extends RecyclerView.Adapter<RcvAdapter_forCo
                     intent.putExtra("stringName", dataList.get(getAdapterPosition()).getName());
                     intent.putExtra("stringPrize", dataList.get(getAdapterPosition()).getPrize());
                     intent.putExtra("stringQualification", dataList.get(getAdapterPosition()).getQuali());
-
+                    intent.putExtra("stringImage", dataList.get(getAdapterPosition()).getImage());
                     mContext.startActivity(intent);
                 }
             });
@@ -68,12 +77,8 @@ public class RcvAdapter_forContest extends RecyclerView.Adapter<RcvAdapter_forCo
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.tvName.setText(dataList.get(position).getName());
+        holder.date.setText("일시 : "+dataList.get(position).getDate());
+        holder.deadline.setText("신청기한 : "+dataList.get(position).getDeadline());
+        holder.location.setText("장소 : "+dataList.get(position).getLocation());
     }
-
-//    private void removeItem(int position) {
-//        dataList.remove(position);
-//        notifyItemRemoved(position);
-//        notifyItemRangeChanged(position, dataList.size());
-//    }
-
 }

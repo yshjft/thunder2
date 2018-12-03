@@ -67,17 +67,20 @@ public class SignIn extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
-                                Toast.makeText(SignIn.this, "SignIn Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignIn.this, "로그인 실패", Toast.LENGTH_SHORT).show();
                             } else {
                                 Intent intent = new Intent(SignIn.this, setting_market.class);
-                                intent.putExtra("stringUID", firebaseAuth.getCurrentUser().getUid());
+                                Toast.makeText(SignIn.this, "로그인", Toast.LENGTH_SHORT).show();
+                                try {
+                                    intent.putExtra("stringUID", firebaseAuth.getCurrentUser().getUid());
+                                }catch(Exception e){}
                                 startActivity(intent);
                                 finish();
                             }
                         }
                     });
         }catch(Exception e){
-
+           Toast.makeText(getApplicationContext(), "입력이 완료되지 않았습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -1,6 +1,5 @@
 package com.example.thunder2;
 
-//PC방 상세정보창이여, init() 걍 이미지 잘 들어가나 확인하는 거야
 
 import android.content.Context;
 import android.location.Address;
@@ -14,10 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -40,14 +41,9 @@ public class aboutPC extends FragmentActivity
 
     //파이어베이스 시작
     private DatabaseReference mDatabase;
-    private ArrayList<Integer> seatList=new ArrayList<>();
+//    ArrayList<DataForm_forPC> list= new ArrayList<>();
     //파이어베이스 끝
 
-    //이미지에 관한 리사이클러뷰 시작
-    RecyclerView rcv;
-    RcvAdapter_aboutPC rcvAdapter;
-    ArrayList<DataForm_forPC> list= new ArrayList<>();
-    //이미지에 관한 리사이클러뷰 시작
 
     private GoogleMap mMap;
     private String locationName; //주소 스트링 값
@@ -63,8 +59,6 @@ public class aboutPC extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_pclist_aboutpc);
 
-
-
         mContext = this;
 
         //전달된 데이터 받기 시작
@@ -78,6 +72,7 @@ public class aboutPC extends FragmentActivity
         String getNotice =getIntent().getStringExtra("stringNotice");
         String getUid=getIntent().getStringExtra("stringUID");
         strUid=getUid;
+        String getImage=getIntent().getStringExtra("stringImage");
         //전달된 데이터 받기
 
 
@@ -91,14 +86,18 @@ public class aboutPC extends FragmentActivity
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                unuse=dataSnapshot.getValue(int.class);
+                try {
+                    unuse = dataSnapshot.getValue(int.class);
+                }catch(Exception e){ }
 
-                if(unuse > getSeatTotal){
-                    Toast.makeText(getApplicationContext(), "남은자리가 잘못되었습니다.", Toast.LENGTH_SHORT).show();
-                }else {
-                    TextView seatUnuse = (TextView) findViewById(R.id.pc_seatUnuse);
-                    seatUnuse.setText(unuse + "");
-                }
+                try {
+                    if (unuse > getSeatTotal) {
+                        Toast.makeText(getApplicationContext(), "남은자리가 잘못되었습니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        TextView seatUnuse = (TextView) findViewById(R.id.pc_seatUnuse);
+                        seatUnuse.setText(unuse + "");
+                    }
+                }catch(Exception e){ }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
@@ -106,6 +105,11 @@ public class aboutPC extends FragmentActivity
 
 
         //데이터 XML에 넣기 시작
+        ImageView target = (ImageView) findViewById(R.id.imageView2);
+        Glide.with(mContext)
+                .load(getImage)
+                .into(target);
+
         TextView name=(TextView)findViewById(R.id.pc_name);
         name.setText(getName);
         TextView address=(TextView)findViewById(R.id.pc_address);
@@ -120,13 +124,6 @@ public class aboutPC extends FragmentActivity
         notice.setText(getNotice);
         //데이터 XML에 넣기 끝
 
-        //이미지에 관한 리사이클러뷰 시작
-        init();
-        rcv=(RecyclerView)findViewById(R.id.second_rcv);
-        rcv.setLayoutManager(new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false));
-        rcvAdapter=new RcvAdapter_aboutPC(this, list);
-        rcv.setAdapter(rcvAdapter);
-        //이미지에 관한 리사이클러뷰 시작
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -163,14 +160,4 @@ public class aboutPC extends FragmentActivity
         mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
     }
 
-    private void init(){
-        DataForm_forPC a=new DataForm_forPC("넥스트");
-        list.add(a);
-
-        a=new DataForm_forPC("고릴라");
-        list.add(a);
-
-        a=new DataForm_forPC("조이칸");
-        list.add(a);
-    }
 }
